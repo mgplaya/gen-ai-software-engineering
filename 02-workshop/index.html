@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARKANOID 8-BIT</title>
+<style>
+  :root {
+    --bg: #0f0f1b;
+    --panel: #1a1a2e;
+    --ink: #e8e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Courier New", monospace;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    user-select: none;
+    padding: 12px;
+  }
+  h1 {
+    font-size: clamp(20px, 5vw, 40px);
+    letter-spacing: 4px;
+    color: #ffe14d;
+    text-shadow: 3px 3px 0 #e0453b, 6px 6px 0 #000;
+    font-weight: 900;
+  }
+  .frame {
+    position: relative;
+    padding: 8px;
+    background: #2a2a44;
+    border: 4px solid #000;
+    box-shadow: 0 0 0 4px #4d4d80, 8px 8px 0 #000;
+  }
+  canvas {
+    display: block;
+    background: #000;
+    image-rendering: pixelated;
+    border: 4px solid #000;
+  }
+  .hud {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #7fffd4;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 6px;
+  }
+  .hud b { color: #ffe14d; }
+  .hint {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #8a8ab0;
+    text-align: center;
+  }
+  .hint kbd {
+    background: #2a2a44;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 #000;
+    padding: 1px 6px;
+    color: #ffe14d;
+  }
+</style>
+</head>
+<body>
+  <h1>ARKANOID</h1>
+  <div class="frame">
+    <div class="hud">
+      <span>SCORE <b id="score">0</b></span>
+      <span>LEVEL <b id="level">1</b></span>
+      <span>LIVES <b id="lives">3</b></span>
+    </div>
+    <canvas id="game" width="480" height="520"></canvas>
+  </div>
+  <div class="hint">
+    MOVE <kbd>&larr;</kbd> <kbd>&rarr;</kbd> or MOUSE &nbsp;&middot;&nbsp;
+    LAUNCH / PAUSE <kbd>SPACE</kbd> &nbsp;&middot;&nbsp; RESTART <kbd>R</kbd>
+  </div>
+
+<script>
+(() => {
+  "use strict";
+  const canvas = document.getElementById("game");
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+
+  // ---- 8-bit palette ----
+  const PAL = ["#e0453b", "#f0821e", "#ffe14d", "#4dd24d", "#3aa0ff", "#a05df0", "#ff6ec7"];
+
+  // ---- HUD elements ----
+  const elScore = document.getElementById("score");
+  const elLevel = document.getElementById("level");
+  const elLives = document.getElementById("lives");
+
+  // ---- Layout ----
+  const COLS = 12, ROWS = 7;
+  const BRICK_TOP = 60, BRICK_GAP = 4;
+  const BRICK_W = (W - BRICK_GAP) / COLS - BRICK_GAP;
+  const BRICK_H = 20;
+
+  // ---- Game state ----
+  let state, bricks, paddle, ball, particles, score, lives, level, shakeT;
+
+  function makeLevel(n) {
+    const arr = [];
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        // Skip some bricks on higher levels for pattern variety
+        if (n >= 2 && ((r + c + n) % 7 === 0)) continue;
+        const hp = r < 1 ? 3 : r < 3 ? 2 : 1;
+        arr.push({
+          x: BRICK_GAP + c * (BRICK_W + BRICK_GAP),
+          y: BRICK_TOP + r * (BRICK_H + BRICK_GAP),
+          w: BRICK_W, h: BRICK_H,
+          hp, maxHp: hp,
+          color: PAL[r % PAL.length],
+        });
+      }
+    }
+    return arr;
+  }
+
+  function resetPaddle() {
+    paddle = { w: 72, h: 12, x: W / 2 - 36, y: H - 30, speed: 7, dir: 0 };
+  }
+
+  function resetBall(stuck = true) {
+    ball = {
+      x: W / 2, y: paddle.y - 8, r: 6,
+      vx: 0, vy: 0, speed: 4 + level * 0.4, stuck,
+    };
+  }
+
+  function startLevel(n) {
+    level = n;
+    bricks = makeLevel(n);
+    resetPaddle();
+    resetBall(true);
+    particles = [];
+    updateHUD();
+  }
+
+  function newGame() {
+    score = 0; lives = 3; shakeT = 0;
+    state = "ready";
+    startLevel(1);
+  }
+
+  function updateHUD() {
+    elScore.textContent = score;
+    elLevel.textContent = level;
+    elLives.textContent = lives;
+  }
+
+  // ---- Sound (Web Audio, 8-bit square waves) ----
+  let audio;
+  function beep(freq, dur = 0.06, type = "square", vol = 0.06) {
+    try {
+      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+      const o = audio.createOscillator();
+      const g = audio.createGain();
+      o.type = type; o.frequency.value = freq;
+      g.gain.value = vol;
+      o.connect(g); g.connect(audio.destination);
+      const t = audio.currentTime;
+      o.start(t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.stop(t + dur);
+    } catch (e) { /* audio not available */ }
+  }
+
+  // ---- Launch ball off paddle ----
+  function launch() {
+    ball.stuck = false;
+    const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.6;
+    ball.vx = Math.cos(angle) * ball.speed;
+    ball.vy = Math.sin(angle) * ball.speed;
+    beep(660, 0.08);
+  }
+
+  function spawnParticles(x, y, color, n = 8) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const s = 1 + Math.random() * 3;
+      particles.push({
+        x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s,
+        life: 1, color, size: 2 + Math.floor(Math.random() * 3),
+      });
+    }
+  }
+
+  // ---- Input ----
+  const keys = {};
+  addEventListener("keydown", (e) => {
+    if (["ArrowLeft", "ArrowRight", " "].includes(e.key)) e.preventDefault();
+    keys[e.key] = true;
+    if (e.key === " ") handleSpace();
+    if (e.key.toLowerCase() === "r") newGame();
+  });
+  addEventListener("keyup", (e) => { keys[e.key] = false; });
+
+  canvas.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    paddle.x = Math.max(0, Math.min(W - paddle.w, mx - paddle.w / 2));
+  });
+  canvas.addEventListener("click", handleSpace);
+
+  function handleSpace() {
+    if (state === "ready") { state = "play"; if (ball.stuck) launch(); }
+    else if (state === "play") {
+      if (ball.stuck) launch();
+      else state = "paused";
+    }
+    else if (state === "paused") state = "play";
+    else if (state === "gameover" || state === "win") newGame();
+  }
+
+  // ---- Update ----
+  function update() {
+    if (state !== "play") return;
+
+    // Paddle keyboard movement
+    if (keys["ArrowLeft"]) paddle.x -= paddle.speed;
+    if (keys["ArrowRight"]) paddle.x += paddle.speed;
+    paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x));
+
+    if (ball.stuck) {
+      ball.x = paddle.x + paddle.w / 2;
+      ball.y = paddle.y - ball.r - 2;
+    } else {
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+    }
+
+    // Wall collisions
+    if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx *= -1; beep(320, 0.04); }
+    if (ball.x + ball.r > W) { ball.x = W - ball.r; ball.vx *= -1; beep(320, 0.04); }
+    if (ball.y - ball.r < 0) { ball.y = ball.r; ball.vy *= -1; beep(320, 0.04); }
+
+    // Paddle collision
+    if (ball.vy > 0 &&
+        ball.y + ball.r >= paddle.y &&
+        ball.y + ball.r <= paddle.y + paddle.h + 8 &&
+        ball.x >= paddle.x && ball.x <= paddle.x + paddle.w) {
+      const hit = (ball.x - (paddle.x + paddle.w / 2)) / (paddle.w / 2); // -1..1
+      const angle = -Math.PI / 2 + hit * (Math.PI / 3);
+      ball.vx = Math.cos(angle) * ball.speed;
+      ball.vy = Math.sin(angle) * ball.speed;
+      ball.y = paddle.y - ball.r;
+      beep(520, 0.05);
+    }
+
+    // Brick collisions
+    for (let i = 0; i < bricks.length; i++) {
+      const b = bricks[i];
+      if (ball.x + ball.r > b.x && ball.x - ball.r < b.x + b.w &&
+          ball.y + ball.r > b.y && ball.y - ball.r < b.y + b.h) {
+        // Determine bounce axis by overlap
+        const overlapX = Math.min(ball.x + ball.r - b.x, b.x + b.w - (ball.x - ball.r));
+        const overlapY = Math.min(ball.y + ball.r - b.y, b.y + b.h - (ball.y - ball.r));
+        if (overlapX < overlapY) ball.vx *= -1; else ball.vy *= -1;
+
+        b.hp--;
+        spawnParticles(ball.x, ball.y, b.color, 6);
+        beep(440 + b.hp * 120, 0.05);
+        if (b.hp <= 0) {
+          score += 10 * b.maxHp;
+          spawnParticles(b.x + b.w / 2, b.y + b.h / 2, b.color, 12);
+          bricks.splice(i, 1);
+          shakeT = 6;
+          beep(700, 0.07, "square", 0.05);
+        }
+        updateHUD();
+        break;
+      }
+    }
+
+    // Ball lost
+    if (ball.y - ball.r > H) {
+      lives--;
+      shakeT = 12;
+      beep(160, 0.3, "sawtooth", 0.08);
+      updateHUD();
+      if (lives <= 0) { state = "gameover"; }
+      else { resetPaddle(); resetBall(true); state = "ready"; }
+    }
+
+    // Level cleared
+    if (bricks.length === 0) {
+      if (level >= 5) { state = "win"; }
+      else { startLevel(level + 1); state = "ready"; beep(880, 0.15); }
+    }
+
+    // Particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.15; p.life -= 0.04;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+
+    if (shakeT > 0) shakeT--;
+  }
+
+  // ---- Draw ----
+  function px(v) { return Math.round(v); }
+
+  function draw() {
+    ctx.save();
+    if (shakeT > 0) {
+      ctx.translate((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4);
+    }
+
+    // Background
+    ctx.fillStyle = "#000";
+    ctx.fillRect(-6, -6, W + 12, H + 12);
+
+    // Starfield dots (static-ish grid)
+    ctx.fillStyle = "#151530";
+    for (let y = 0; y < H; y += 16) {
+      for (let x = 0; x < W; x += 16) {
+        if ((x + y) % 48 === 0) ctx.fillRect(x, y, 2, 2);
+      }
+    }
+
+    // Bricks
+    for (const b of bricks) {
+      const shade = b.hp / b.maxHp;
+      ctx.fillStyle = b.color;
+      ctx.globalAlpha = 0.4 + 0.6 * shade;
+      ctx.fillRect(px(b.x), px(b.y), px(b.w), px(b.h));
+      ctx.globalAlpha = 1;
+      // 8-bit highlight + shadow
+      ctx.fillStyle = "rgba(255,255,255,0.35)";
+      ctx.fillRect(px(b.x), px(b.y), px(b.w), 3);
+      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.fillRect(px(b.x), px(b.y + b.h - 3), px(b.w), 3);
+    }
+
+    // Particles
+    for (const p of particles) {
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(px(p.x), px(p.y), p.size, p.size);
+    }
+    ctx.globalAlpha = 1;
+
+    // Paddle (chunky pixel look)
+    ctx.fillStyle = "#3aa0ff";
+    ctx.fillRect(px(paddle.x), px(paddle.y), px(paddle.w), px(paddle.h));
+    ctx.fillStyle = "#bfe3ff";
+    ctx.fillRect(px(paddle.x), px(paddle.y), px(paddle.w), 3);
+    ctx.fillStyle = "#1a5aa0";
+    ctx.fillRect(px(paddle.x), px(paddle.y + paddle.h - 3), px(paddle.w), 3);
+
+    // Ball (square = 8-bit)
+    ctx.fillStyle = "#ffe14d";
+    ctx.fillRect(px(ball.x - ball.r), px(ball.y - ball.r), ball.r * 2, ball.r * 2);
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(px(ball.x - ball.r), px(ball.y - ball.r), 3, 3);
+
+    ctx.restore();
+
+    // Overlays
+    if (state !== "play") drawOverlay();
+  }
+
+  function drawText(text, y, size, color) {
+    ctx.font = `900 ${size}px "Courier New", monospace`;
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#000";
+    ctx.fillText(text, W / 2 + 3, y + 3);
+    ctx.fillStyle = color;
+    ctx.fillText(text, W / 2, y);
+  }
+
+  function drawOverlay() {
+    ctx.fillStyle = "rgba(0,0,0,0.65)";
+    ctx.fillRect(0, 0, W, H);
+    if (state === "ready") {
+      drawText("LEVEL " + level, H / 2 - 30, 28, "#7fffd4");
+      drawText("PRESS SPACE TO LAUNCH", H / 2 + 10, 16, "#ffe14d");
+    } else if (state === "paused") {
+      drawText("PAUSED", H / 2 - 10, 32, "#ffe14d");
+      drawText("SPACE TO RESUME", H / 2 + 24, 14, "#7fffd4");
+    } else if (state === "gameover") {
+      drawText("GAME OVER", H / 2 - 20, 34, "#e0453b");
+      drawText("SCORE " + score, H / 2 + 14, 18, "#ffe14d");
+      drawText("PRESS SPACE / R", H / 2 + 44, 14, "#7fffd4");
+    } else if (state === "win") {
+      drawText("YOU WIN!", H / 2 - 20, 34, "#4dd24d");
+      drawText("SCORE " + score, H / 2 + 14, 18, "#ffe14d");
+      drawText("PRESS SPACE / R", H / 2 + 44, 14, "#7fffd4");
+    }
+  }
+
+  // ---- Main loop ----
+  function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  newGame();
+  loop();
+})();
+</script>
+</body>
+</html>
