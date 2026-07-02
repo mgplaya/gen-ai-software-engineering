@@ -1,0 +1,6 @@
+customer_id,customer_email,customer_name,subject,description,assigned_to,tags,metadata_source,metadata_browser,metadata_device_type
+CUST-100,not-an-email,Missing Email Format,Valid subject line,This description is long enough to pass validation.,,,web_form,,desktop
+CUST-101,valid@example.com,,Valid subject line,This description is long enough to pass validation.,,,web_form,,desktop
+CUST-102,valid@example.com,Too Short Description,Valid subject line,short,,,web_form,,desktop
+CUST-103,valid@example.com,Bad Source Value,Valid subject line,This description is long enough to pass validation.,,,carrier_pigeon,,desktop
+CUST-104,valid@example.com,All Good Ticket,This one should import fine,This description is long enough to pass validation easily.,,vip,web_form,Chrome,mobile

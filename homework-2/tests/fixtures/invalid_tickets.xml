@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-300</customer_id>
+    <customer_email>not-an-email</customer_email>
+    <customer_name>Bad Email</customer_name>
+    <subject>Subject</subject>
+    <description>This description is long enough to pass validation.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser></browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-301</customer_id>
+    <customer_email>valid@example.com</customer_email>
+    <customer_name></customer_name>
+    <subject>Subject</subject>
+    <description>This description is long enough to pass validation.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser></browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-302</customer_id>
+    <customer_email>valid@example.com</customer_email>
+    <customer_name>Short Description</customer_name>
+    <subject>Subject</subject>
+    <description>short</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser></browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-303</customer_id>
+    <customer_email>valid@example.com</customer_email>
+    <customer_name>Bad Source</customer_name>
+    <subject>Subject</subject>
+    <description>This description is long enough to pass validation.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>carrier_pigeon</source>
+      <browser></browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-304</customer_id>
+    <customer_email>valid@example.com</customer_email>
+    <customer_name>All Good Ticket</customer_name>
+    <subject>This one should import fine</subject>
+    <description>This description is long enough to pass validation easily.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>vip</tag></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+</tickets>

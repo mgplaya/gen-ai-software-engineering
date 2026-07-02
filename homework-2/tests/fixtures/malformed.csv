@@ -1,0 +1,2 @@
+customer_id,customer_email,customer_name,subject,description
+"CUST-1,unterminated@example.com,"Broken Quote,Subject,This description is long enough.

@@ -1,0 +1,297 @@
+[
+  {
+    "customer_id": "CUST-006",
+    "customer_email": "farid.hassan@example.com",
+    "customer_name": "Farid Hassan",
+    "subject": "Minor glitch in the settings page",
+    "description": "There is a small cosmetic glitch where the settings page icons are misaligned, minor issue only.",
+    "tags": [
+      "ui"
+    ],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-007",
+    "customer_email": "grace.oconnor@example.com",
+    "customer_name": "Grace O'Connor",
+    "subject": "Steps to reproduce a data export bug",
+    "description": "Steps to reproduce: open reports, click export, the file is corrupted every time, a clear defect.",
+    "tags": [
+      "export"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-008",
+    "customer_email": "hiro.tanaka@example.com",
+    "customer_name": "Hiro Tanaka",
+    "subject": "Regression in the checkout flow",
+    "description": "We found a regression after the last release, steps to reproduce are in the attached video, blocking release.",
+    "tags": [
+      "checkout"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-009",
+    "customer_email": "irina.petrenko@example.com",
+    "customer_name": "Irina Petrenko",
+    "subject": "Overcharged on my last invoice",
+    "description": "I was overcharged on my latest invoice and would like a refund for the extra billing amount.",
+    "assigned_to": "agent-3",
+    "tags": [
+      "billing"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-010",
+    "customer_email": "james.walker@example.com",
+    "customer_name": "James Walker",
+    "subject": "Subscription payment failed",
+    "description": "My subscription payment failed but the charge still appears on my credit card statement, please check billing asap.",
+    "tags": [
+      "payment"
+    ],
+    "metadata": {
+      "source": "phone",
+      "browser": "",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-001",
+    "customer_email": "alice.nguyen@example.com",
+    "customer_name": "Alice Nguyen",
+    "subject": "Question about refund policy",
+    "description": "I would like to understand your refund policy before requesting one for a recent charge.",
+    "tags": [],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-002",
+    "customer_email": "bob.martins@example.com",
+    "customer_name": "Bob Martins",
+    "subject": "Feature request: dark mode",
+    "description": "It would be nice to have a dark mode option added to the dashboard, just a suggestion for a future release.",
+    "tags": [
+      "feature"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-003",
+    "customer_email": "carla.silva@example.com",
+    "customer_name": "Carla Silva",
+    "subject": "Please add bulk export enhancement",
+    "description": "Could you add an enhancement to export multiple reports at once, this is a minor suggestion.",
+    "assigned_to": "agent-1",
+    "tags": [
+      "feature"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-004",
+    "customer_email": "daniel.kim@example.com",
+    "customer_name": "Daniel Kim",
+    "subject": "General question about pricing tiers",
+    "description": "I have a general question about the differences between your pricing tiers before I decide.",
+    "tags": [],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-005",
+    "customer_email": "elena.popova@example.com",
+    "customer_name": "Elena Popova",
+    "subject": "Production down for our organization",
+    "description": "Our production environment is down for all users, this is a critical outage affecting the whole team.",
+    "tags": [
+      "outage"
+    ],
+    "metadata": {
+      "source": "phone",
+      "browser": "",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-006",
+    "customer_email": "farid.hassan@example.com",
+    "customer_name": "Farid Hassan",
+    "subject": "Security concern with shared links",
+    "description": "I noticed a security issue where shared links do not expire, this seems critical and important to fix.",
+    "tags": [
+      "security"
+    ],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-007",
+    "customer_email": "grace.oconnor@example.com",
+    "customer_name": "Grace O'Connor",
+    "subject": "Blocking issue before our launch",
+    "description": "We have a blocking issue that is important to resolve before our launch tomorrow, please treat as asap.",
+    "assigned_to": "agent-2",
+    "tags": [],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-008",
+    "customer_email": "hiro.tanaka@example.com",
+    "customer_name": "Hiro Tanaka",
+    "subject": "Suggestion for onboarding emails",
+    "description": "Just a small suggestion about the onboarding email wording, nothing urgent, purely cosmetic.",
+    "tags": [],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-009",
+    "customer_email": "irina.petrenko@example.com",
+    "customer_name": "Irina Petrenko",
+    "subject": "Can't access my account after password reset",
+    "description": "I reset my password yesterday but now I can't access my account at all, this is critical for my team.",
+    "tags": [
+      "login"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-010",
+    "customer_email": "james.walker@example.com",
+    "customer_name": "James Walker",
+    "subject": "Two-factor authentication not sending codes",
+    "description": "My 2fa app is not receiving codes and I am completely locked out, security is a concern here.",
+    "tags": [
+      "2fa"
+    ],
+    "metadata": {
+      "source": "phone",
+      "browser": "",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-001",
+    "customer_email": "alice.nguyen@example.com",
+    "customer_name": "Alice Nguyen",
+    "subject": "Forgot password, need to sign in",
+    "description": "I forgot my password and the reset link is not arriving, please help me log in again.",
+    "assigned_to": "agent-3",
+    "tags": [],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-002",
+    "customer_email": "bob.martins@example.com",
+    "customer_name": "Bob Martins",
+    "subject": "App crashes on startup",
+    "description": "The mobile app crashes every time I open it, this error happens on every launch.",
+    "tags": [
+      "crash"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-003",
+    "customer_email": "carla.silva@example.com",
+    "customer_name": "Carla Silva",
+    "subject": "Dashboard throwing an error",
+    "description": "The dashboard shows a generic error and freezes, it is quite important that this gets fixed.",
+    "tags": [
+      "bug"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-004",
+    "customer_email": "daniel.kim@example.com",
+    "customer_name": "Daniel Kim",
+    "subject": "Minor glitch in the settings page",
+    "description": "There is a small cosmetic glitch where the settings page icons are misaligned, minor issue only.",
+    "tags": [
+      "ui"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-005",
+    "customer_email": "elena.popova@example.com",
+    "customer_name": "Elena Popova",
+    "subject": "Steps to reproduce a data export bug",
+    "description": "Steps to reproduce: open reports, click export, the file is corrupted every time, a clear defect.",
+    "assigned_to": "agent-1",
+    "tags": [
+      "export"
+    ],
+    "metadata": {
+      "source": "phone",
+      "browser": "",
+      "device_type": "desktop"
+    }
+  }
+]

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-002</customer_id>
+    <customer_email>bob.martins@example.com</customer_email>
+    <customer_name>Bob Martins</customer_name>
+    <subject>Feature request: dark mode</subject>
+    <description>It would be nice to have a dark mode option added to the dashboard, just a suggestion for a future release.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>feature</tag></tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-003</customer_id>
+    <customer_email>carla.silva@example.com</customer_email>
+    <customer_name>Carla Silva</customer_name>
+    <subject>Please add bulk export enhancement</subject>
+    <description>Could you add an enhancement to export multiple reports at once, this is a minor suggestion.</description>
+    <assigned_to>agent-1</assigned_to>
+    <tags><tag>feature</tag></tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-004</customer_id>
+    <customer_email>daniel.kim@example.com</customer_email>
+    <customer_name>Daniel Kim</customer_name>
+    <subject>General question about pricing tiers</subject>
+    <description>I have a general question about the differences between your pricing tiers before I decide.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-005</customer_id>
+    <customer_email>elena.popova@example.com</customer_email>
+    <customer_name>Elena Popova</customer_name>
+    <subject>Production down for our organization</subject>
+    <description>Our production environment is down for all users, this is a critical outage affecting the whole team.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>outage</tag></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-006</customer_id>
+    <customer_email>farid.hassan@example.com</customer_email>
+    <customer_name>Farid Hassan</customer_name>
+    <subject>Security concern with shared links</subject>
+    <description>I noticed a security issue where shared links do not expire, this seems critical and important to fix.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>security</tag></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-007</customer_id>
+    <customer_email>grace.oconnor@example.com</customer_email>
+    <customer_name>Grace O'Connor</customer_name>
+    <subject>Blocking issue before our launch</subject>
+    <description>We have a blocking issue that is important to resolve before our launch tomorrow, please treat as asap.</description>
+    <assigned_to>agent-2</assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-008</customer_id>
+    <customer_email>hiro.tanaka@example.com</customer_email>
+    <customer_name>Hiro Tanaka</customer_name>
+    <subject>Suggestion for onboarding emails</subject>
+    <description>Just a small suggestion about the onboarding email wording, nothing urgent, purely cosmetic.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-009</customer_id>
+    <customer_email>irina.petrenko@example.com</customer_email>
+    <customer_name>Irina Petrenko</customer_name>
+    <subject>Can't access my account after password reset</subject>
+    <description>I reset my password yesterday but now I can't access my account at all, this is critical for my team.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>login</tag></tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-010</customer_id>
+    <customer_email>james.walker@example.com</customer_email>
+    <customer_name>James Walker</customer_name>
+    <subject>Two-factor authentication not sending codes</subject>
+    <description>My 2fa app is not receiving codes and I am completely locked out, security is a concern here.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>2fa</tag></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-001</customer_id>
+    <customer_email>alice.nguyen@example.com</customer_email>
+    <customer_name>Alice Nguyen</customer_name>
+    <subject>Forgot password, need to sign in</subject>
+    <description>I forgot my password and the reset link is not arriving, please help me log in again.</description>
+    <assigned_to>agent-3</assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-002</customer_id>
+    <customer_email>bob.martins@example.com</customer_email>
+    <customer_name>Bob Martins</customer_name>
+    <subject>App crashes on startup</subject>
+    <description>The mobile app crashes every time I open it, this error happens on every launch.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>crash</tag></tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-003</customer_id>
+    <customer_email>carla.silva@example.com</customer_email>
+    <customer_name>Carla Silva</customer_name>
+    <subject>Dashboard throwing an error</subject>
+    <description>The dashboard shows a generic error and freezes, it is quite important that this gets fixed.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>bug</tag></tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-004</customer_id>
+    <customer_email>daniel.kim@example.com</customer_email>
+    <customer_name>Daniel Kim</customer_name>
+    <subject>Minor glitch in the settings page</subject>
+    <description>There is a small cosmetic glitch where the settings page icons are misaligned, minor issue only.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>ui</tag></tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-005</customer_id>
+    <customer_email>elena.popova@example.com</customer_email>
+    <customer_name>Elena Popova</customer_name>
+    <subject>Steps to reproduce a data export bug</subject>
+    <description>Steps to reproduce: open reports, click export, the file is corrupted every time, a clear defect.</description>
+    <assigned_to>agent-1</assigned_to>
+    <tags><tag>export</tag></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-006</customer_id>
+    <customer_email>farid.hassan@example.com</customer_email>
+    <customer_name>Farid Hassan</customer_name>
+    <subject>Regression in the checkout flow</subject>
+    <description>We found a regression after the last release, steps to reproduce are in the attached video, blocking release.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>checkout</tag></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-007</customer_id>
+    <customer_email>grace.oconnor@example.com</customer_email>
+    <customer_name>Grace O'Connor</customer_name>
+    <subject>Overcharged on my last invoice</subject>
+    <description>I was overcharged on my latest invoice and would like a refund for the extra billing amount.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>billing</tag></tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-008</customer_id>
+    <customer_email>hiro.tanaka@example.com</customer_email>
+    <customer_name>Hiro Tanaka</customer_name>
+    <subject>Subscription payment failed</subject>
+    <description>My subscription payment failed but the charge still appears on my credit card statement, please check billing asap.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>payment</tag></tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-009</customer_id>
+    <customer_email>irina.petrenko@example.com</customer_email>
+    <customer_name>Irina Petrenko</customer_name>
+    <subject>Question about refund policy</subject>
+    <description>I would like to understand your refund policy before requesting one for a recent charge.</description>
+    <assigned_to>agent-2</assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-010</customer_id>
+    <customer_email>james.walker@example.com</customer_email>
+    <customer_name>James Walker</customer_name>
+    <subject>Feature request: dark mode</subject>
+    <description>It would be nice to have a dark mode option added to the dashboard, just a suggestion for a future release.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>feature</tag></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-001</customer_id>
+    <customer_email>alice.nguyen@example.com</customer_email>
+    <customer_name>Alice Nguyen</customer_name>
+    <subject>Please add bulk export enhancement</subject>
+    <description>Could you add an enhancement to export multiple reports at once, this is a minor suggestion.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>feature</tag></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-002</customer_id>
+    <customer_email>bob.martins@example.com</customer_email>
+    <customer_name>Bob Martins</customer_name>
+    <subject>General question about pricing tiers</subject>
+    <description>I have a general question about the differences between your pricing tiers before I decide.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-003</customer_id>
+    <customer_email>carla.silva@example.com</customer_email>
+    <customer_name>Carla Silva</customer_name>
+    <subject>Production down for our organization</subject>
+    <description>Our production environment is down for all users, this is a critical outage affecting the whole team.</description>
+    <assigned_to>agent-3</assigned_to>
+    <tags><tag>outage</tag></tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-004</customer_id>
+    <customer_email>daniel.kim@example.com</customer_email>
+    <customer_name>Daniel Kim</customer_name>
+    <subject>Security concern with shared links</subject>
+    <description>I noticed a security issue where shared links do not expire, this seems critical and important to fix.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>security</tag></tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-005</customer_id>
+    <customer_email>elena.popova@example.com</customer_email>
+    <customer_name>Elena Popova</customer_name>
+    <subject>Blocking issue before our launch</subject>
+    <description>We have a blocking issue that is important to resolve before our launch tomorrow, please treat as asap.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-006</customer_id>
+    <customer_email>farid.hassan@example.com</customer_email>
+    <customer_name>Farid Hassan</customer_name>
+    <subject>Suggestion for onboarding emails</subject>
+    <description>Just a small suggestion about the onboarding email wording, nothing urgent, purely cosmetic.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-007</customer_id>
+    <customer_email>grace.oconnor@example.com</customer_email>
+    <customer_name>Grace O'Connor</customer_name>
+    <subject>Can't access my account after password reset</subject>
+    <description>I reset my password yesterday but now I can't access my account at all, this is critical for my team.</description>
+    <assigned_to>agent-1</assigned_to>
+    <tags><tag>login</tag></tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-008</customer_id>
+    <customer_email>hiro.tanaka@example.com</customer_email>
+    <customer_name>Hiro Tanaka</customer_name>
+    <subject>Two-factor authentication not sending codes</subject>
+    <description>My 2fa app is not receiving codes and I am completely locked out, security is a concern here.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>2fa</tag></tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-009</customer_id>
+    <customer_email>irina.petrenko@example.com</customer_email>
+    <customer_name>Irina Petrenko</customer_name>
+    <subject>Forgot password, need to sign in</subject>
+    <description>I forgot my password and the reset link is not arriving, please help me log in again.</description>
+    <assigned_to></assigned_to>
+    <tags></tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-010</customer_id>
+    <customer_email>james.walker@example.com</customer_email>
+    <customer_name>James Walker</customer_name>
+    <subject>App crashes on startup</subject>
+    <description>The mobile app crashes every time I open it, this error happens on every launch.</description>
+    <assigned_to></assigned_to>
+    <tags><tag>crash</tag></tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-001</customer_id>
+    <customer_email>alice.nguyen@example.com</customer_email>
+    <customer_name>Alice Nguyen</customer_name>
+    <subject>Dashboard throwing an error</subject>
+    <description>The dashboard shows a generic error and freezes, it is quite important that this gets fixed.</description>
+    <assigned_to>agent-2</assigned_to>
+    <tags><tag>bug</tag></tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+</tickets>

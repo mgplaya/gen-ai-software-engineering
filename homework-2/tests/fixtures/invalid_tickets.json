@@ -1,0 +1,56 @@
+[
+  {
+    "customer_id": "CUST-200",
+    "customer_email": "not-an-email",
+    "customer_name": "Bad Email",
+    "subject": "Subject",
+    "description": "This description is long enough to pass validation.",
+    "metadata": {
+      "source": "web_form"
+    }
+  },
+  {
+    "customer_id": "CUST-201",
+    "customer_email": "valid@example.com",
+    "customer_name": "Missing Subject",
+    "subject": "",
+    "description": "This description is long enough to pass validation.",
+    "metadata": {
+      "source": "web_form"
+    }
+  },
+  {
+    "customer_id": "CUST-202",
+    "customer_email": "valid@example.com",
+    "customer_name": "Short Description",
+    "subject": "Subject",
+    "description": "short",
+    "metadata": {
+      "source": "web_form"
+    }
+  },
+  {
+    "customer_id": "CUST-203",
+    "customer_email": "valid@example.com",
+    "customer_name": "Bad Metadata Source",
+    "subject": "Subject",
+    "description": "This description is long enough to pass validation.",
+    "metadata": {
+      "source": "carrier_pigeon"
+    }
+  },
+  {
+    "customer_id": "CUST-204",
+    "customer_email": "valid@example.com",
+    "customer_name": "All Good Ticket",
+    "subject": "This one should import fine",
+    "description": "This description is long enough to pass validation easily.",
+    "tags": [
+      "vip"
+    ],
+    "metadata": {
+      "source": "chat",
+      "device_type": "tablet"
+    }
+  }
+]
