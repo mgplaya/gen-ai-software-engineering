@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-950</customer_id>
+    <customer_email>viktor.marchenko@example.com</customer_email>
+    <customer_name>Viktor Marchenko</customer_name>
+    <subject>The ticket element below never closes</subject>
+    <description>The closing tag for this ticket is missing entirely.
+  <ticket>
+    <customer_id>CUST-951</customer_id>
+</tickets>

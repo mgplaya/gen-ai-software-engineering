@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-100</customer_id>
+    <customer_email>alice.johnson0@example.com</customer_email>
+    <customer_name>Alice Johnson</customer_name>
+    <subject>Can't access my account after password reset</subject>
+    <description>I tried to log in several times but my password is rejected and now I am locked out.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>login</tag>
+      <tag>password</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-101</customer_id>
+    <customer_email>bob.smith1@example.com</customer_email>
+    <customer_name>Bob Smith</customer_name>
+    <subject>2FA code never arrives</subject>
+    <description>The two-factor authentication SMS never arrives so I cannot sign in to the dashboard.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>2fa</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-102</customer_id>
+    <customer_email>carol.white2@example.com</customer_email>
+    <customer_name>Carol White</customer_name>
+    <subject>Login page keeps redirecting</subject>
+    <description>After entering my password the login page loops back. This is blocking my whole team, please fix asap.</description>
+    <category>account_access</category>
+    <priority>high</priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>login</tag>
+      <tag>sso</tag>
+    </tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-103</customer_id>
+    <customer_email>david.brown3@example.com</customer_email>
+    <customer_name>David Brown</customer_name>
+    <subject>Application crash on startup</subject>
+    <description>The desktop app shows an error and crashes right after launch. This is critical for our workflow.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>crash</tag>
+      <tag>desktop-app</tag>
+    </tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-104</customer_id>
+    <customer_email>emma.davis4@example.com</customer_email>
+    <customer_name>Emma Davis</customer_name>
+    <subject>Error 500 when saving a report</subject>
+    <description>Saving any report returns an exception and the page shows a broken layout.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>reports</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-105</customer_id>
+    <customer_email>frank.miller5@example.com</customer_email>
+    <customer_name>Frank Miller</customer_name>
+    <subject>Search results freeze the browser</subject>
+    <description>Searching for long phrases makes the tab freeze, search has been not working since the last update.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>search</tag>
+      <tag>performance</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-106</customer_id>
+    <customer_email>grace.wilson6@example.com</customer_email>
+    <customer_name>Grace Wilson</customer_name>
+    <subject>Production is down after the latest deploy</subject>
+    <description>Our production is down with error pages since the latest update, this is critical for all users.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>outage</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-107</customer_id>
+    <customer_email>henry.moore7@example.com</customer_email>
+    <customer_name>Henry Moore</customer_name>
+    <subject>Overcharged on my last invoice</subject>
+    <description>My invoice shows a double charge for the same subscription period, please refund the difference.</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>billing</tag>
+      <tag>refund</tag>
+    </tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-108</customer_id>
+    <customer_email>iryna.taylor8@example.com</customer_email>
+    <customer_name>Iryna Taylor</customer_name>
+    <subject>Payment declined but money withdrawn</subject>
+    <description>The payment failed at checkout but my credit card was still charged. This is important, please help asap.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>billing</tag>
+      <tag>payment</tag>
+    </tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-109</customer_id>
+    <customer_email>jack.anderson9@example.com</customer_email>
+    <customer_name>Jack Anderson</customer_name>
+    <subject>How do I download old invoices</subject>
+    <description>I need copies of past invoices for accounting, where can I find the billing history section?</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>billing</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-110</customer_id>
+    <customer_email>alice.johnson10@example.com</customer_email>
+    <customer_name>Alice Johnson</customer_name>
+    <subject>Please add dark mode</subject>
+    <description>It would be nice to have a dark theme, just a suggestion for the roadmap.</description>
+    <category>feature_request</category>
+    <priority>low</priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>ui</tag>
+      <tag>theme</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-111</customer_id>
+    <customer_email>bob.smith11@example.com</customer_email>
+    <customer_name>Bob Smith</customer_name>
+    <subject>Feature request: export to Excel</subject>
+    <description>Please add an enhancement that allows exporting dashboards to Excel files.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>export</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-112</customer_id>
+    <customer_email>carol.white12@example.com</customer_email>
+    <customer_name>Carol White</customer_name>
+    <subject>Enhancement: bulk actions for tickets</subject>
+    <description>Could you add a bulk edit enhancement so we can close many tickets at once? Just a suggestion.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>bulk</tag>
+    </tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-113</customer_id>
+    <customer_email>david.brown13@example.com</customer_email>
+    <customer_name>David Brown</customer_name>
+    <subject>Reproducible defect in report totals</subject>
+    <description>Steps to reproduce: open a report, add a filter, totals are wrong. Looks like a regression from v2.1.</description>
+    <category>bug_report</category>
+    <priority>medium</priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>reports</tag>
+      <tag>regression</tag>
+    </tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-114</customer_id>
+    <customer_email>emma.davis14@example.com</customer_email>
+    <customer_name>Emma Davis</customer_name>
+    <subject>Regression: attachments fail to upload</subject>
+    <description>Steps to reproduce: create a ticket, attach a PDF, the upload fails every time. Reproducible on two machines.</description>
+    <category>bug_report</category>
+    <priority>medium</priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>attachments</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-115</customer_id>
+    <customer_email>frank.miller15@example.com</customer_email>
+    <customer_name>Frank Miller</customer_name>
+    <subject>Possible security issue with sessions</subject>
+    <description>Sessions stay active after logout which looks like a security problem for our compliance team.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>security</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-116</customer_id>
+    <customer_email>grace.wilson16@example.com</customer_email>
+    <customer_name>Grace Wilson</customer_name>
+    <subject>Minor cosmetic issue in the footer</subject>
+    <description>The footer alignment is slightly off on mobile, a minor cosmetic issue only.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>ui</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-117</customer_id>
+    <customer_email>henry.moore17@example.com</customer_email>
+    <customer_name>Henry Moore</customer_name>
+    <subject>General question about onboarding</subject>
+    <description>Where can I find the onboarding materials for new teammates joining next month?</description>
+    <category>other</category>
+    <priority>medium</priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>onboarding</tag>
+    </tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-118</customer_id>
+    <customer_email>iryna.taylor18@example.com</customer_email>
+    <customer_name>Iryna Taylor</customer_name>
+    <subject>Feedback about your webinar, thanks!</subject>
+    <description>Great session yesterday, sharing some general feedback and thanks from our team.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>feedback</tag>
+    </tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-119</customer_id>
+    <customer_email>jack.anderson19@example.com</customer_email>
+    <customer_name>Jack Anderson</customer_name>
+    <subject>Broken export button, blocking our reporting</subject>
+    <description>The export button shows an error and nothing downloads, this is important and blocking our monthly reporting.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>export</tag>
+      <tag>reports</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-120</customer_id>
+    <customer_email>alice.johnson20@example.com</customer_email>
+    <customer_name>Alice Johnson</customer_name>
+    <subject>Can't access my account after password reset</subject>
+    <description>I tried to log in several times but my password is rejected and now I am locked out.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>login</tag>
+      <tag>password</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-121</customer_id>
+    <customer_email>bob.smith21@example.com</customer_email>
+    <customer_name>Bob Smith</customer_name>
+    <subject>2FA code never arrives</subject>
+    <description>The two-factor authentication SMS never arrives so I cannot sign in to the dashboard.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>2fa</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-122</customer_id>
+    <customer_email>carol.white22@example.com</customer_email>
+    <customer_name>Carol White</customer_name>
+    <subject>Login page keeps redirecting</subject>
+    <description>After entering my password the login page loops back. This is blocking my whole team, please fix asap.</description>
+    <category>account_access</category>
+    <priority>high</priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>login</tag>
+      <tag>sso</tag>
+    </tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-123</customer_id>
+    <customer_email>david.brown23@example.com</customer_email>
+    <customer_name>David Brown</customer_name>
+    <subject>Application crash on startup</subject>
+    <description>The desktop app shows an error and crashes right after launch. This is critical for our workflow.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>crash</tag>
+      <tag>desktop-app</tag>
+    </tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-124</customer_id>
+    <customer_email>emma.davis24@example.com</customer_email>
+    <customer_name>Emma Davis</customer_name>
+    <subject>Error 500 when saving a report</subject>
+    <description>Saving any report returns an exception and the page shows a broken layout.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>reports</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-125</customer_id>
+    <customer_email>frank.miller25@example.com</customer_email>
+    <customer_name>Frank Miller</customer_name>
+    <subject>Search results freeze the browser</subject>
+    <description>Searching for long phrases makes the tab freeze, search has been not working since the last update.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>search</tag>
+      <tag>performance</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+      <browser>Chrome</browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-126</customer_id>
+    <customer_email>grace.wilson26@example.com</customer_email>
+    <customer_name>Grace Wilson</customer_name>
+    <subject>Production is down after the latest deploy</subject>
+    <description>Our production is down with error pages since the latest update, this is critical for all users.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <assigned_to>agent.kovalenko</assigned_to>
+    <tags>
+      <tag>outage</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Firefox</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-127</customer_id>
+    <customer_email>henry.moore27@example.com</customer_email>
+    <customer_name>Henry Moore</customer_name>
+    <subject>Overcharged on my last invoice</subject>
+    <description>My invoice shows a double charge for the same subscription period, please refund the difference.</description>
+    <category></category>
+    <priority></priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>billing</tag>
+      <tag>refund</tag>
+    </tags>
+    <metadata>
+      <source>api</source>
+      <browser>Safari</browser>
+      <device_type></device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-128</customer_id>
+    <customer_email>iryna.taylor28@example.com</customer_email>
+    <customer_name>Iryna Taylor</customer_name>
+    <subject>Payment declined but money withdrawn</subject>
+    <description>The payment failed at checkout but my credit card was still charged. This is important, please help asap.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <assigned_to></assigned_to>
+    <tags>
+      <tag>billing</tag>
+      <tag>payment</tag>
+    </tags>
+    <metadata>
+      <source>chat</source>
+      <browser>Edge</browser>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-129</customer_id>
+    <customer_email>jack.anderson29@example.com</customer_email>
+    <customer_name>Jack Anderson</customer_name>
+    <subject>How do I download old invoices</subject>
+    <description>I need copies of past invoices for accounting, where can I find the billing history section?</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <assigned_to>agent.petrenko</assigned_to>
+    <tags>
+      <tag>billing</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser></browser>
+      <device_type>mobile</device_type>
+    </metadata>
+  </ticket>
+</tickets>

@@ -1,0 +1,130 @@
+### Customer Support API — sample requests
+### Use with the VS Code "REST Client" extension (or import into Postman).
+### Start the server first:  npm run start:prod
+
+@baseUrl = http://localhost:3000
+
+### 1. Create a ticket (with auto-classification on create)
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "DEMO-001",
+  "customer_email": "jane.doe@example.com",
+  "customer_name": "Jane Doe",
+  "subject": "Cannot log in to my account",
+  "description": "My password is rejected and now I am locked out, this is critical.",
+  "autoClassify": true,
+  "tags": ["demo"],
+  "metadata": { "source": "web_form", "browser": "Chrome", "device_type": "desktop" }
+}
+
+### 2. Create a ticket with explicit category/priority (no classification)
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "DEMO-002",
+  "customer_email": "bob.smith@example.com",
+  "customer_name": "Bob Smith",
+  "subject": "Question about my invoice",
+  "description": "I was overcharged on my last invoice and would like a refund.",
+  "category": "billing_question",
+  "priority": "high",
+  "metadata": { "source": "email" }
+}
+
+### 3. Validation error demo (invalid email → 400)
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "DEMO-003",
+  "customer_email": "not-an-email",
+  "customer_name": "Bad Email",
+  "subject": "Broken payload",
+  "description": "This payload has an invalid email.",
+  "metadata": { "source": "api" }
+}
+
+### 4. Bulk import — CSV (50 rows) with auto-classification
+POST {{baseUrl}}/tickets/import?autoClassify=true
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="sample_tickets.csv"
+Content-Type: text/csv
+
+< ../tests/fixtures/sample_tickets.csv
+--Boundary--
+
+### 5. Bulk import — JSON (20 records)
+POST {{baseUrl}}/tickets/import
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="sample_tickets.json"
+Content-Type: application/json
+
+< ../tests/fixtures/sample_tickets.json
+--Boundary--
+
+### 6. Bulk import — XML (30 tickets)
+POST {{baseUrl}}/tickets/import
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="sample_tickets.xml"
+Content-Type: application/xml
+
+< ../tests/fixtures/sample_tickets.xml
+--Boundary--
+
+### 7. Import with per-row failures (4 of 5 rows invalid)
+POST {{baseUrl}}/tickets/import
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="invalid_tickets.csv"
+Content-Type: text/csv
+
+< ../tests/fixtures/invalid_tickets.csv
+--Boundary--
+
+### 8. Malformed file → 400 with meaningful message
+POST {{baseUrl}}/tickets/import
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="malformed.json"
+Content-Type: application/json
+
+< ../tests/fixtures/malformed.json
+--Boundary--
+
+### 9. List all tickets
+GET {{baseUrl}}/tickets
+
+### 10. Combined filtering
+GET {{baseUrl}}/tickets?category=account_access&priority=urgent
+
+### 11. Filter by status / assignee / tag
+GET {{baseUrl}}/tickets?status=new&tag=demo
+
+### 12. Get a single ticket (replace :id)
+GET {{baseUrl}}/tickets/REPLACE-WITH-ID
+
+### 13. Auto-classify an existing ticket (replace :id)
+POST {{baseUrl}}/tickets/REPLACE-WITH-ID/auto-classify
+
+### 14. Update: assign and resolve (replace :id)
+PUT {{baseUrl}}/tickets/REPLACE-WITH-ID
+Content-Type: application/json
+
+{
+  "assigned_to": "agent.petrenko",
+  "status": "resolved"
+}
+
+### 15. Delete a ticket (replace :id)
+DELETE {{baseUrl}}/tickets/REPLACE-WITH-ID
