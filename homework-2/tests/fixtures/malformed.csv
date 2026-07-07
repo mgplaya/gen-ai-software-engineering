@@ -1,0 +1,3 @@
+customer_id,customer_email,customer_name,subject,description,category,priority,assigned_to,tags,metadata_source,metadata_browser,metadata_device_type
+CUST-930,ivan.horbach@example.com,Ivan Horbach,"Unclosed quote starts here,The description never sees a closing quote so the parser must fail,technical_issue,medium,,csv,web_form,Chrome,desktop
+CUST-931,daria.klymenko@example.com,Daria Klymenko,Second row after the broken one,This row cannot be reached by a strict CSV parser.,other,low,,csv,email,Firefox,mobile

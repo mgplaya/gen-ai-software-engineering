@@ -1,0 +1,338 @@
+[
+  {
+    "customer_id": "CUST-100",
+    "customer_email": "alice.johnson0@example.com",
+    "customer_name": "Alice Johnson",
+    "subject": "Can't access my account after password reset",
+    "description": "I tried to log in several times but my password is rejected and now I am locked out.",
+    "tags": [
+      "login",
+      "password"
+    ],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-101",
+    "customer_email": "bob.smith1@example.com",
+    "customer_name": "Bob Smith",
+    "subject": "2FA code never arrives",
+    "description": "The two-factor authentication SMS never arrives so I cannot sign in to the dashboard.",
+    "category": "account_access",
+    "priority": "urgent",
+    "assigned_to": "agent.petrenko",
+    "tags": [
+      "2fa"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-102",
+    "customer_email": "carol.white2@example.com",
+    "customer_name": "Carol White",
+    "subject": "Login page keeps redirecting",
+    "description": "After entering my password the login page loops back. This is blocking my whole team, please fix asap.",
+    "category": "account_access",
+    "priority": "high",
+    "assigned_to": "agent.kovalenko",
+    "tags": [
+      "login",
+      "sso"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-103",
+    "customer_email": "david.brown3@example.com",
+    "customer_name": "David Brown",
+    "subject": "Application crash on startup",
+    "description": "The desktop app shows an error and crashes right after launch. This is critical for our workflow.",
+    "tags": [
+      "crash",
+      "desktop-app"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge"
+    }
+  },
+  {
+    "customer_id": "CUST-104",
+    "customer_email": "emma.davis4@example.com",
+    "customer_name": "Emma Davis",
+    "subject": "Error 500 when saving a report",
+    "description": "Saving any report returns an exception and the page shows a broken layout.",
+    "category": "technical_issue",
+    "priority": "medium",
+    "tags": [
+      "reports"
+    ],
+    "metadata": {
+      "source": "phone",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-105",
+    "customer_email": "frank.miller5@example.com",
+    "customer_name": "Frank Miller",
+    "subject": "Search results freeze the browser",
+    "description": "Searching for long phrases makes the tab freeze, search has been not working since the last update.",
+    "category": "technical_issue",
+    "priority": "medium",
+    "assigned_to": "agent.petrenko",
+    "tags": [
+      "search",
+      "performance"
+    ],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-106",
+    "customer_email": "grace.wilson6@example.com",
+    "customer_name": "Grace Wilson",
+    "subject": "Production is down after the latest deploy",
+    "description": "Our production is down with error pages since the latest update, this is critical for all users.",
+    "assigned_to": "agent.kovalenko",
+    "tags": [
+      "outage"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-107",
+    "customer_email": "henry.moore7@example.com",
+    "customer_name": "Henry Moore",
+    "subject": "Overcharged on my last invoice",
+    "description": "My invoice shows a double charge for the same subscription period, please refund the difference.",
+    "category": "billing_question",
+    "priority": "medium",
+    "tags": [
+      "billing",
+      "refund"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari"
+    }
+  },
+  {
+    "customer_id": "CUST-108",
+    "customer_email": "iryna.taylor8@example.com",
+    "customer_name": "Iryna Taylor",
+    "subject": "Payment declined but money withdrawn",
+    "description": "The payment failed at checkout but my credit card was still charged. This is important, please help asap.",
+    "category": "billing_question",
+    "priority": "high",
+    "tags": [
+      "billing",
+      "payment"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-109",
+    "customer_email": "jack.anderson9@example.com",
+    "customer_name": "Jack Anderson",
+    "subject": "How do I download old invoices",
+    "description": "I need copies of past invoices for accounting, where can I find the billing history section?",
+    "assigned_to": "agent.petrenko",
+    "tags": [
+      "billing"
+    ],
+    "metadata": {
+      "source": "phone",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-110",
+    "customer_email": "alice.johnson10@example.com",
+    "customer_name": "Alice Johnson",
+    "subject": "Please add dark mode",
+    "description": "It would be nice to have a dark theme, just a suggestion for the roadmap.",
+    "category": "feature_request",
+    "priority": "low",
+    "assigned_to": "agent.kovalenko",
+    "tags": [
+      "ui",
+      "theme"
+    ],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-111",
+    "customer_email": "bob.smith11@example.com",
+    "customer_name": "Bob Smith",
+    "subject": "Feature request: export to Excel",
+    "description": "Please add an enhancement that allows exporting dashboards to Excel files.",
+    "category": "feature_request",
+    "priority": "medium",
+    "tags": [
+      "export"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox"
+    }
+  },
+  {
+    "customer_id": "CUST-112",
+    "customer_email": "carol.white12@example.com",
+    "customer_name": "Carol White",
+    "subject": "Enhancement: bulk actions for tickets",
+    "description": "Could you add a bulk edit enhancement so we can close many tickets at once? Just a suggestion.",
+    "tags": [
+      "bulk"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-113",
+    "customer_email": "david.brown13@example.com",
+    "customer_name": "David Brown",
+    "subject": "Reproducible defect in report totals",
+    "description": "Steps to reproduce: open a report, add a filter, totals are wrong. Looks like a regression from v2.1.",
+    "category": "bug_report",
+    "priority": "medium",
+    "assigned_to": "agent.petrenko",
+    "tags": [
+      "reports",
+      "regression"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-114",
+    "customer_email": "emma.davis14@example.com",
+    "customer_name": "Emma Davis",
+    "subject": "Regression: attachments fail to upload",
+    "description": "Steps to reproduce: create a ticket, attach a PDF, the upload fails every time. Reproducible on two machines.",
+    "category": "bug_report",
+    "priority": "medium",
+    "assigned_to": "agent.kovalenko",
+    "tags": [
+      "attachments"
+    ],
+    "metadata": {
+      "source": "phone",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-115",
+    "customer_email": "frank.miller15@example.com",
+    "customer_name": "Frank Miller",
+    "subject": "Possible security issue with sessions",
+    "description": "Sessions stay active after logout which looks like a security problem for our compliance team.",
+    "tags": [
+      "security"
+    ],
+    "metadata": {
+      "source": "web_form",
+      "browser": "Chrome"
+    }
+  },
+  {
+    "customer_id": "CUST-116",
+    "customer_email": "grace.wilson16@example.com",
+    "customer_name": "Grace Wilson",
+    "subject": "Minor cosmetic issue in the footer",
+    "description": "The footer alignment is slightly off on mobile, a minor cosmetic issue only.",
+    "category": "other",
+    "priority": "low",
+    "tags": [
+      "ui"
+    ],
+    "metadata": {
+      "source": "email",
+      "browser": "Firefox",
+      "device_type": "desktop"
+    }
+  },
+  {
+    "customer_id": "CUST-117",
+    "customer_email": "henry.moore17@example.com",
+    "customer_name": "Henry Moore",
+    "subject": "General question about onboarding",
+    "description": "Where can I find the onboarding materials for new teammates joining next month?",
+    "category": "other",
+    "priority": "medium",
+    "assigned_to": "agent.petrenko",
+    "tags": [
+      "onboarding"
+    ],
+    "metadata": {
+      "source": "api",
+      "browser": "Safari",
+      "device_type": "mobile"
+    }
+  },
+  {
+    "customer_id": "CUST-118",
+    "customer_email": "iryna.taylor18@example.com",
+    "customer_name": "Iryna Taylor",
+    "subject": "Feedback about your webinar, thanks!",
+    "description": "Great session yesterday, sharing some general feedback and thanks from our team.",
+    "assigned_to": "agent.kovalenko",
+    "tags": [
+      "feedback"
+    ],
+    "metadata": {
+      "source": "chat",
+      "browser": "Edge",
+      "device_type": "tablet"
+    }
+  },
+  {
+    "customer_id": "CUST-119",
+    "customer_email": "jack.anderson19@example.com",
+    "customer_name": "Jack Anderson",
+    "subject": "Broken export button, blocking our reporting",
+    "description": "The export button shows an error and nothing downloads, this is important and blocking our monthly reporting.",
+    "category": "technical_issue",
+    "priority": "high",
+    "tags": [
+      "export",
+      "reports"
+    ],
+    "metadata": {
+      "source": "phone"
+    }
+  }
+]

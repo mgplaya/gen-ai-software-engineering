@@ -1,0 +1,6 @@
+customer_id,customer_email,customer_name,subject,description,category,priority,assigned_to,tags,metadata_source,metadata_browser,metadata_device_type
+CUST-900,not-an-email,Broken Email,Cannot open settings page,The settings page shows a blank screen every time I open it.,technical_issue,medium,,settings,web_form,Chrome,desktop
+CUST-901,olena.bondar@example.com,Olena Bondar,,The subject of this ticket is empty which is not allowed by validation.,other,medium,,,email,Firefox,mobile
+CUST-902,petro.shevchenko@example.com,Petro Shevchenko,Description is way too short,Too short,technical_issue,medium,,short,api,Safari,tablet
+CUST-903,oksana.melnyk@example.com,Oksana Melnyk,Category value is not a valid enum,This row uses a category value that does not exist in the enum list.,invalid_category,medium,,enums,chat,Edge,desktop
+CUST-904,taras.kravchenko@example.com,Taras Kravchenko,Valid row among invalid ones,This is the only fully valid row in this file and it must import fine.,other,low,agent.petrenko,valid,phone,Chrome,mobile

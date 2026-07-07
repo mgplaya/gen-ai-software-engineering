@@ -1,0 +1,39 @@
+[
+  {
+    "customer_id": "CUST-910",
+    "customer_name": "Missing Email",
+    "subject": "This record has no customer_email field",
+    "description": "The customer_email property is completely missing from this record.",
+    "metadata": { "source": "api" }
+  },
+  {
+    "customer_id": "CUST-911",
+    "customer_email": "nadia.tkachenko@example.com",
+    "customer_name": "Nadia Tkachenko",
+    "subject": "Description too short here",
+    "description": "Short one",
+    "tags": ["json"],
+    "metadata": { "source": "web_form", "browser": "Chrome" }
+  },
+  {
+    "customer_id": "CUST-912",
+    "customer_email": "roman.lysenko@example.com",
+    "customer_name": "Roman Lysenko",
+    "subject": "Priority value is not a valid enum",
+    "description": "This record uses a priority that is not part of the allowed enum values.",
+    "priority": "super-urgent",
+    "tags": ["json", "enums"],
+    "metadata": { "source": "chat", "device_type": "mobile" }
+  },
+  {
+    "customer_id": "CUST-913",
+    "customer_email": "sofia.rudenko@example.com",
+    "customer_name": "Sofia Rudenko",
+    "subject": "Valid JSON record among invalid ones",
+    "description": "This is the only fully valid record in this file and it must import fine.",
+    "category": "billing_question",
+    "priority": "medium",
+    "tags": ["json", "valid"],
+    "metadata": { "source": "email", "browser": "Firefox", "device_type": "desktop" }
+  }
+]
