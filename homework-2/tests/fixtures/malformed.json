@@ -1,0 +1,7 @@
+[
+  {
+    "customer_id": "CUST-940",
+    "customer_email": "maksym.zaytsev@example.com",
+    "customer_name": "Maksym Zaytsev",
+    "subject": "This JSON file is truncated",
+    "description": "The array below never closes and the last object is cut in the mi

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>CUST-920</customer_id>
+    <customer_email>broken-email-value</customer_email>
+    <customer_name>Broken Email</customer_name>
+    <subject>Email field is not a valid address</subject>
+    <description>The customer_email element of this ticket contains a plain string.</description>
+    <category>other</category>
+    <priority>medium</priority>
+    <tags>
+      <tag>xml</tag>
+    </tags>
+    <metadata>
+      <source>web_form</source>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-921</customer_id>
+    <customer_email>yulia.savchenko@example.com</customer_email>
+    <customer_name>Yulia Savchenko</customer_name>
+    <subject></subject>
+    <description>The subject element of this ticket is empty which fails validation.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <tags>
+      <tag>xml</tag>
+    </tags>
+    <metadata>
+      <source>email</source>
+      <browser>Safari</browser>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-922</customer_id>
+    <customer_email>andriy.polishchuk@example.com</customer_email>
+    <customer_name>Andriy Polishchuk</customer_name>
+    <subject>Metadata source is not a valid enum</subject>
+    <description>This ticket uses a metadata source value that is not allowed.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <tags>
+      <tag>xml</tag>
+      <tag>enums</tag>
+    </tags>
+    <metadata>
+      <source>carrier-pigeon</source>
+      <device_type>desktop</device_type>
+    </metadata>
+  </ticket>
+  <ticket>
+    <customer_id>CUST-923</customer_id>
+    <customer_email>kateryna.boyko@example.com</customer_email>
+    <customer_name>Kateryna Boyko</customer_name>
+    <subject>Valid XML ticket among invalid ones</subject>
+    <description>This is the only fully valid ticket in this file and it must import fine.</description>
+    <category>feature_request</category>
+    <priority>low</priority>
+    <tags>
+      <tag>xml</tag>
+      <tag>valid</tag>
+    </tags>
+    <metadata>
+      <source>phone</source>
+      <browser>Edge</browser>
+      <device_type>tablet</device_type>
+    </metadata>
+  </ticket>
+</tickets>
