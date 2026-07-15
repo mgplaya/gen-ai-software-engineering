@@ -185,8 +185,9 @@ Document, but do not execute, the following future evidence:
   cannot, `FR-003`/`NFR-004` feasibility must be escalated and the specification re-approved.
 - Stable transaction snapshots must exist at the processor/ledger boundary or require the sanitized
   issuer read projection described in R-004.
-- Student name and final editor-rules location are package-completion inputs, not planning blockers;
-  `.github/copilot-instructions.md` is the recommended rules artifact.
+- Student name and final editor-rules location are package-completion inputs, not planning blockers.
+  The user selected active ChatGPT/Codex rules in `AGENTS.md`; on case-insensitive APFS this physical
+  file also carries the logical graded `agents.md` section.
 
 ## Research Completion
 

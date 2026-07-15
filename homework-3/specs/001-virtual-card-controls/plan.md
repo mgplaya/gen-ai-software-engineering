@@ -20,8 +20,8 @@ future implementation tasks precise without creating code, APIs, UI, schemas, or
 **Approved working specification**: `specs/001-virtual-card-controls/spec.md` at SHA-256
 `7cdd28c597f5c0ed440337eefc4a5b229b5eff9f909fa56a6582b5ef4a2a9ed9`
 **Spec Kit working directory**: `specs/001-virtual-card-controls/`
-**Required deliverables**: `specification.md`, `agents.md`, `.github/copilot-instructions.md`,
-`README.md`
+**Required deliverables**: `specification.md`, logical `agents.md` guidance plus active ChatGPT/Codex
+rules in the combined physical `AGENTS.md`, and `README.md`
 **Domain reviewers**: Product/requirements, payments/risk, security, compliance/privacy, reliability,
 QA/traceability
 **Assumed system context**: Existing identity/ownership, issuer policy, processor authorization and
@@ -108,8 +108,7 @@ specs/001-virtual-card-controls/
 
 homework-3/
 ├── specification.md                # Canonical graded product body + validated low-level tasks
-├── agents.md                       # Graded future-agent guidance; task-generated
-├── .github/copilot-instructions.md # Recommended editor/AI rules; task-generated
+├── AGENTS.md / agents.md           # Operational + graded guidance + active ChatGPT/Codex rules
 └── README.md                       # Graded rationale/practice mapping; task-generated
 ```
 
@@ -132,7 +131,7 @@ adding the already-planned downstream task section does not silently change prod
 | Control-command and transaction contracts | Contract/QA analyst | Standard | Clear pre/postconditions and scenario mapping | Security/privacy reviewer / Advanced | Separate contract files |
 | Internal access, audit, taxonomy, recovery contract | Security/compliance analyst | Advanced | High-risk authorization/evidence judgment | Separate security/compliance reviewer / Advanced | Data model and other contracts after taxonomy fixed |
 | Quickstart/checklist/terminology validation | Documentation QA | Economy | Mechanical checklist and link work | QA reviewer / Standard | All non-overlapping draft artifacts |
-| `agents.md` and editor rules draft | Engineering-guidance writer | Standard | Concrete conventions from approved plan | FinTech/security reviewer / Advanced | README after shared glossary |
+| Combined `AGENTS.md`/`agents.md` and active ChatGPT/Codex rules | Engineering-guidance writer | Standard | Concrete conventions in the instruction file Codex actually reads | FinTech/security reviewer / Advanced | README after shared glossary |
 | README rationale and practice mapping | Technical writer | Standard | Synthesis with cited sources | Compliance/technical reviewer / Standard; Economy link scan | Agent/rules drafting |
 | Cross-artifact reconciliation and Gate 2 synthesis | Planning orchestrator | Advanced | Resolves high-impact conflicts and gate evidence | Independent consistency reviewer / Advanced | None; runs after drafts |
 
@@ -151,7 +150,7 @@ non-overlapping output files.
 | `contracts/internal-access-audit.md` | Internal roles, taxonomy, evidence/recovery | OBJ-004–OBJ-006; NFR-001–NFR-003, NFR-011–NFR-012 | Role×case×purpose×action negative review; evidence/taxonomy reconciliation | Gate 2 |
 | `quickstart.md` | All Phase 0/1 artifacts and checklists | SC-008 and all traceability | Documentation-only walkthrough; zero unresolved placeholders/findings | Gate 2 |
 | Future `specification.md` | Approved `spec.md`, validated `tasks.md`, approval provenance | Entire approved product specification plus required low-level tasks | Product-body semantic equivalence and task parity/traceability reviewed separately | Gate 3 package |
-| Future `agents.md` / editor rules | Constitution, plan, contracts | Domain/stack/verification/edge/security guidance | Conflict, scope, and prohibited-action review | Gate 3 package |
+| Combined `AGENTS.md` / logical `agents.md` / ChatGPT-Codex rules | Constitution, plan, contracts | Domain/stack/verification/edge/security guidance | Conflict, scope, prohibited-action, and active-instruction review | Gate 3 package |
 | Future `README.md` | Approved package and research sources | Rationale and best-practice mapping | Link/section/source/assumption review | Gate 3 package |
 
 ## Dependencies and Execution Order
@@ -170,8 +169,8 @@ non-overlapping output files.
 7. **Post-Gate 2 only**: generate agent-routed `tasks.md`, run consistency analysis, and resolve
    findings; task generation does not authorize application implementation.
 8. **Documentation task execution**: publish canonical `specification.md` with the approved product body
-   plus synchronized low-level tasks, then produce `agents.md`, editor rules, and `README.md` according
-   to the validated task order.
+   plus synchronized low-level tasks, then produce the combined `AGENTS.md`/logical `agents.md` with
+   active ChatGPT/Codex rules and `README.md` according to the validated task order.
 9. **Gate 3**: validate the complete graded package, canonical/provenance parity, and unresolved risks;
    wait for explicit final approval.
 10. **Homework stop condition**: after final approved documentation package, never run

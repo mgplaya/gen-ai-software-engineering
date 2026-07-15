@@ -36,9 +36,10 @@ export, cross-case export, and oversized export are deterministic denials withou
 ## Compliance Export
 
 An allowed export is bound to one actor/role, one assigned open case, enumerated purpose, current
-step-up outcome category, explicit canonical-taxonomy allowlist, no more than 10,000 records, creation
+step-up outcome category, a current approved/versioned purpose-bound field allowlist compatible with
+the canonical taxonomy, no more than 10,000 records, creation
 and 24-hour expiry, attribution/watermark, correlation, and audit intent. Operations and unrelated-case
-fields are prohibited.
+fields are prohibited. Missing, stale, or purpose/case-mismatched allowlist policy fails closed.
 
 ## Audit Intent/Event Contract
 
@@ -56,6 +57,13 @@ fields are prohibited.
 Diagnostic logs/alerts are separate: correlation, service/result/error category, timing, and sanitized
 component metadata only. They contain no raw business payload or taxonomy-prohibited category and are
 never the sole financial-control evidence.
+
+Every distinct control-command or privileged outcome maps to one root audit identity. Exact retries
+reference the stored original and do not create another business event. Validation, conflict,
+idempotency mismatch, unavailable, denied, successful no-op, successful mutation, and pending results
+all produce attributable sanitized outcome evidence; pending propagation and final reconciliation are
+immutable linked events under the same root. This preserves attempt coverage without counting retry
+delivery as a second business outcome.
 
 ## Recovery State and Timelines
 
