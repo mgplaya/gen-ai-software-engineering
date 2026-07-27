@@ -1,0 +1,49 @@
+# pipeline.yaml — declarative workflow for the Architect-Led TDD Build Pipeline.
+#
+# This file is the single source of truth for the AGENT WORKFLOW: the ordered
+# stages, each stage's agent, its enforced tool boundary, the human gate, and a
+# one-line goal. run-pipeline.sh is a thin engine that reads this file and executes
+# the stages in order.
+#
+# Notes:
+#   - MODEL is intentionally NOT set here. Each stage's model is read from its
+#     agent file frontmatter (agents/*.agent.md `model:`) — the homework requires
+#     the model to live in the agent definition, so that stays the single source
+#     of truth. The engine reads it from there.
+#   - SKILLS are auto-loaded from each agent file's `skills:` frontmatter.
+#   - tools: the enforced per-stage permission boundary (Constitution II). Verifier
+#     stages get read/report tools only (no Edit, no Bash). Space-separated.
+#   - gate_after: true  -> the pipeline STOPS after this stage for a human to verify
+#     the plan; `./run-pipeline.sh --continue` resumes with the next stage.
+
+stages:
+  - id: architect
+    name: Architect
+    agent: agents/architect.agent.md
+    tools: Read Glob Grep Edit Write
+    gate_after: true
+    goal: "Design expense_splitter, scaffold stub interfaces (raise NotImplementedError), and describe the build sequence in architecture.md."
+
+  - id: design-verifier
+    name: Design Verifier
+    agent: agents/research-verifier.agent.md
+    tools: Read Glob Grep Write
+    goal: "Verify every interface in architecture.md against the stubs and rate design quality; write verified-design.md. No code edits."
+
+  - id: test-author
+    name: Unit Test Generator (TDD RED)
+    agent: agents/unit-test-generator.agent.md
+    tools: Read Glob Grep Edit Write Bash
+    goal: "Write FIRST-compliant tests against the designed interfaces; confirm they FAIL (RED); write test-report.md. Do not implement logic."
+
+  - id: implementer
+    name: Implementer (TDD GREEN)
+    agent: agents/bug-fixer.agent.md
+    tools: Read Glob Grep Edit Write Bash
+    goal: "Fill the stubs with minimal correct logic until the tests pass (GREEN) without editing tests; write implementation-summary.md."
+
+  - id: security-verifier
+    name: Security Verifier
+    agent: agents/security-verifier.agent.md
+    tools: Read Glob Grep Write
+    goal: "Confirm the security-sensitive requirement is honored and scan the implemented code; write security-report.md only. No code edits."

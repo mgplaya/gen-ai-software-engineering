@@ -76,7 +76,8 @@ specs/001-tdd-build-pipeline/
 
 ```text
 homework-4/
-├── run-pipeline.sh                # single command + human gate
+├── pipeline.yaml                  # declarative workflow (stages, tools, gate)
+├── run-pipeline.sh                # thin engine that reads pipeline.yaml
 ├── agents/
 │   ├── architect.agent.md         # stage 1 (opus)
 │   ├── research-verifier.agent.md # stage 2 Design Verifier (opus)

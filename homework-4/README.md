@@ -28,6 +28,14 @@ flowchart TD
 **Fixed order** (Constitution VII — *Design-First, then TDD*): design → **human
 verify** → verify design → failing tests → implementation → security review.
 
+### Workflow definition
+
+The workflow is **declarative** in [`pipeline.yaml`](./pipeline.yaml) — the single
+source of truth for the ordered stages, each stage's tool boundary, and the human
+gate. [`run-pipeline.sh`](./run-pipeline.sh) is a thin engine that reads it (each
+stage's **model** comes from its `agents/*.agent.md` frontmatter, and its **skills**
+from that file's `skills:` list). Inspect it with `./run-pipeline.sh --list`.
+
 ## Run it
 
 ```bash
@@ -104,7 +112,8 @@ constitution (7 principles) → `spec.md` (3 user stories, 12 FRs) → `plan.md`
 
 ```
 homework-4/
-├── run-pipeline.sh            # single command + human plan gate
+├── pipeline.yaml              # ← declarative workflow (stages, tools, gate)
+├── run-pipeline.sh            # thin engine that reads pipeline.yaml (single command + gate)
 ├── agents/                    # 5 agent definitions (model in frontmatter)
 ├── skills/                    # architecture-design, research-quality, FIRST, tdd-red-green
 ├── context/build/001/         # feature request + all pipeline artifacts

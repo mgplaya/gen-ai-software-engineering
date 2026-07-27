@@ -62,12 +62,16 @@ tests unchanged.
 ## 7. Options
 
 ```bash
+./run-pipeline.sh --list                   # show the workflow (stages/models/tools/gate) from pipeline.yaml
 ./run-pipeline.sh --all                    # run all 5 stages without stopping at the gate
-./run-pipeline.sh --only architect         # run a single stage
+./run-pipeline.sh --only architect         # run a single stage by its pipeline.yaml id
 ./run-pipeline.sh --only test-author       # design-verifier | test-author | implementer | security-verifier
 ./run-pipeline.sh --dry-run                # show the plan (order/models/skills/tools), call nothing
 ./run-pipeline.sh --help
 ```
+
+The stage order, per-stage tools, and the human gate are declared in
+[`pipeline.yaml`](./pipeline.yaml); `run-pipeline.sh` just executes it.
 
 ## 8. Testing guide
 

@@ -50,7 +50,8 @@ order, loads skills, and scopes tools.
 
 ## Ordering, skill-loading & gate guarantee
 
-`run-pipeline.sh` runs 1 → (gate) → 2 → 3 → 4 → 5. Before each stage it concatenates
+The stage order, per-stage tools, and gate are declared in `pipeline.yaml`; the
+engine reads it and runs 1 → (gate) → 2 → 3 → 4 → 5. Before each stage it concatenates
 the agent definition + its skill files into the system prompt (FR-002 skill
 auto-load). The default invocation stops after stage 1; `--continue` runs 2–5. A
 non-zero exit from any stage halts the pipeline (FR-001, US1 gate).
