@@ -7,8 +7,14 @@ each person's share plus the reconciled total. Amount parsing is done with
 
 from __future__ import annotations
 
-from decimal import Decimal
+import re
+import sys
+from decimal import Decimal, InvalidOperation
 from typing import Sequence
+
+from .core import split_even
+
+_AMOUNT_RE = re.compile(r"^\d+(\.\d{1,2})?$")
 
 
 def parse_amount(text: str) -> Decimal:
@@ -31,7 +37,13 @@ def parse_amount(text: str) -> Decimal:
         ValueError: If ``text`` is not a well-formed, finite, non-negative
             decimal amount with at most 2 fractional digits.
     """
-    raise NotImplementedError("parse_amount")
+    if not _AMOUNT_RE.match(text):
+        raise ValueError(f"invalid amount: {text!r}")
+    try:
+        amount = Decimal(text)
+    except InvalidOperation as exc:
+        raise ValueError(f"invalid amount: {text!r}") from exc
+    return amount.quantize(Decimal("0.01"))
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -51,4 +63,33 @@ def main(argv: Sequence[str] | None = None) -> int:
         error (invalid amount, invalid people count). Never raises on bad
         user input — errors are reported to stderr and mapped to an exit code.
     """
-    raise NotImplementedError("main")
+    if argv is None:
+        argv = sys.argv[1:]
+
+    if len(argv) != 2:
+        print("usage: expense-splitter <amount> <people>", file=sys.stderr)
+        return 1
+
+    amount_text, people_text = argv
+
+    try:
+        amount = parse_amount(amount_text)
+    except ValueError as exc:
+        print(f"invalid amount: {exc}", file=sys.stderr)
+        return 1
+
+    if not re.match(r"^-?\d+$", people_text):
+        print(f"invalid people count: {people_text!r}", file=sys.stderr)
+        return 1
+    people = int(people_text)
+
+    try:
+        shares = split_even(amount, people)
+    except ValueError as exc:
+        print(f"invalid people count: {exc}", file=sys.stderr)
+        return 1
+
+    for i, share in enumerate(shares, start=1):
+        print(f"Person {i}: {share}")
+    print(f"Total: {sum(shares)}")
+    return 0
