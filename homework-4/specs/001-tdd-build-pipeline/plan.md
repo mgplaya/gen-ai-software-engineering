@@ -6,25 +6,25 @@
 
 ## Summary
 
-Build a five-agent, design-first, test-driven pipeline. An **Architect** (heavy
-model) designs a small Python `expense_splitter` from a feature request, scaffolds
-stub interfaces, and describes the build sequence. Execution then **stops at a human
-plan gate**. On `--continue`, a **Design Verifier** checks the design, a **Unit Test
-Generator** (cheap model) writes failing tests (RED), an **Implementer** (mid model)
-fills the stubs until the tests pass (GREEN), and a **Security Verifier** reviews the
-result. One shell command (`run-pipeline.sh`) drives it via the Claude Code CLI,
-auto-loading each agent's skills and granting each stage only the tools its role
-permits.
+Build a five-agent, research-first, test-driven pipeline over a small Python
+`expense_splitter` seeded with 2 functional bugs + 1 security vulnerability. An
+**Architect** (heavy model) researches the bugs and plans the fixes. Execution then
+**stops at a human plan gate**. On `--continue`, a **Bug Research Verifier** checks
+the research against the real source, a **Unit Test Generator** (cheap model) writes
+failing tests that reproduce the bugs (RED), a **Bug Fixer** (mid model) applies the
+fixes until the tests pass (GREEN), and a **Security Verifier** reviews the result.
+One shell command (`run-pipeline.sh`) drives it via the Claude Code CLI, auto-loading
+each agent's skills and granting each stage only the tools its role permits.
 
 ## Technical Context
 
-**Language/Version**: Python 3.11+ (target app, built from scratch); Bash
+**Language/Version**: Python 3.11+ (target app with seeded bugs); Bash
 (orchestrator); Markdown (agents, skills, artifacts).
 
 **Primary Dependencies**: Standard library only at runtime; `pytest` for tests;
 Claude Code CLI (`claude`) for agent execution.
 
-**Storage**: Flat files — `src/`, `tests/`, and artifacts under `context/build/001/`.
+**Storage**: Flat files — `src/`, `tests/`, and artifacts under `context/bugs/001/`.
 
 **Testing**: `pytest` via `python -m pytest`, `pythonpath = ["src"]`.
 
@@ -46,13 +46,13 @@ skills, ~6 artifacts.
 
 | Principle | Compliance in this plan |
 |-----------|-------------------------|
-| I. Artifact-Driven Handoff | Named input→output artifacts per stage under `context/build/001/`. ✅ |
-| II. Single Responsibility | Architect scaffolds stubs; verifiers read-only (no Edit/Bash); only Implementer writes `src/` logic; only Test Gen writes `tests/`. Enforced via per-stage `--allowedTools`. ✅ |
-| III. Verification Before Trust | Human plan gate after Architect + machine Design Verifier before implementation. ✅ |
+| I. Artifact-Driven Handoff | Named input→output artifacts per stage under `context/bugs/001/`. ✅ |
+| II. Single Responsibility | Architect researches bugs (read-only, no code edits); verifiers read-only (no Edit/Bash); only Bug Fixer writes `src/` logic; only Test Gen writes `tests/`. Enforced via per-stage `--allowedTools`. ✅ |
+| III. Verification Before Trust | Human plan gate after Architect + machine Bug Research Verifier before implementation. ✅ |
 | IV. FIRST tests | Test Gen applies `unit-tests-FIRST` + `tdd-red-green`; RED proven before GREEN. ✅ |
-| V. Model-Appropriateness | opus for Architect/Design-Verifier/Security; haiku for Test Gen; sonnet for Implementer; declared in frontmatter. ✅ |
+| V. Model-Appropriateness | opus for Architect/Design-Verifier/Security; haiku for Test Gen; sonnet for Bug Fixer; declared in frontmatter. ✅ |
 | VI. Single-Command (staged) | `run-pipeline.sh` runs all stages; stops at the gate; `--continue` resumes. ✅ |
-| VII. Design-First, then TDD | Fixed order design → verify → RED → GREEN → security. ✅ |
+| VII. Research-First, then TDD | Fixed order design → verify → RED → GREEN → security. ✅ |
 
 **Result**: PASS. Complexity Tracking empty.
 
@@ -80,23 +80,25 @@ homework-4/
 ├── run-pipeline.sh                # thin engine that reads pipeline.yaml
 ├── agents/
 │   ├── architect.agent.md         # stage 1 (opus)
-│   ├── research-verifier.agent.md # stage 2 Design Verifier (opus)
+│   ├── research-verifier.agent.md # stage 2 Bug Research Verifier (opus)
 │   ├── unit-test-generator.agent.md # stage 3 RED (haiku)
-│   ├── bug-fixer.agent.md         # stage 4 Implementer GREEN (sonnet)
+│   ├── bug-fixer.agent.md         # stage 4 Bug Fixer GREEN (sonnet)
 │   └── security-verifier.agent.md # stage 5 (opus)
 ├── skills/
 │   ├── architecture-design.md
 │   ├── research-quality-measurement.md
 │   ├── unit-tests-FIRST.md
 │   └── tdd-red-green.md
-├── context/build/001/
-│   ├── feature-request.md         # human seed input
-│   ├── architecture.md            # Architect output (+ src/ stubs)
-│   ├── verified-design.md         # Design Verifier output
-│   ├── test-report.md             # Test Gen output (RED)
-│   ├── implementation-summary.md  # Implementer output (GREEN)
-│   └── security-report.md         # Security Verifier output
-├── src/expense_splitter/          # stubs -> implementation
+├── context/bugs/001/              # matches TASKS.md Expected Project Structure
+│   ├── bug-context.md             # human seed (build context)
+│   ├── research/
+│   │   ├── codebase-research.md   # Architect output (design research)
+│   │   └── verified-research.md   # Bug Research Verifier output
+│   ├── implementation-plan.md     # Architect output (plan + Build Sequence)
+│   ├── fix-summary.md             # Bug Fixer/Bug Fixer output (GREEN)
+│   ├── security-report.md         # Security Verifier output
+│   └── test-report.md             # Unit Test Generator output (RED)
+├── src/expense_splitter/          # seeded buggy code -> fixed
 ├── tests/                         # tests written first (RED -> GREEN)
 ├── pyproject.toml                 # pytest config
 ├── README.md / HOWTORUN.md
@@ -104,12 +106,12 @@ homework-4/
 ```
 
 **Structure Decision**: Single project. The target app is produced by the pipeline
-(stubs by the Architect, logic by the Implementer); the agentic tooling lives beside
+(bugs researched by the Architect, fixed by the Bug Fixer); the agentic tooling lives beside
 it so the "system that builds" and the "system being built" are one reviewable tree.
 
 ## Phase 0 — Research (see research.md)
 
-Decisions: the design-first + human-gate flow, TDD red/green split across two agents,
+Decisions: the research-first + human-gate flow, TDD red/green split across two agents,
 model assignment (heavy/cheap/mid), and orchestration via headless CLI with per-stage
 tool boundaries.
 

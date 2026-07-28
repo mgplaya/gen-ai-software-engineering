@@ -13,27 +13,27 @@ description: "Task list for the Architect-Led TDD Build Pipeline"
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (different files, no dependencies)
-- **[Story]**: US1 (design-first + gate), US2 (TDD), US3 (models)
+- **[Story]**: US1 (research-first + gate), US2 (TDD), US3 (models)
 
 ## Path Conventions
 
 Single project rooted at `homework-4/` — `agents/`, `skills/`, `src/`, `tests/`,
-`context/build/001/`.
+`context/bugs/001/`.
 
 ---
 
 ## Phase 1: Setup
 
-- [x] T001 Create dirs: `agents/`, `skills/`, `context/build/001/`, `docs/screenshots/`
+- [x] T001 Create dirs: `agents/`, `skills/`, `context/bugs/001/`, `docs/screenshots/`
 - [x] T002 [P] `pyproject.toml` (pytest, `pythonpath=["src"]`) + `requirements.txt`
 - [x] T003 [P] `.gitignore` (`.venv`, `__pycache__`, `.pytest_cache`)
 
 ## Phase 2: Author ALL agent definitions BEFORE running (Constitution: FR-011)
 
-- [x] T004 [US3] `agents/architect.agent.md` — model `claude-opus-4-8`, loads architecture-design skill, scaffolds stubs
-- [x] T005 [US3] `agents/research-verifier.agent.md` — Design Verifier, `claude-opus-4-8`, read-only
+- [x] T004 [US3] `agents/architect.agent.md` — model `claude-opus-4-8`, loads architecture-design skill, researches bugs + plans fixes
+- [x] T005 [US3] `agents/research-verifier.agent.md` — Bug Research Verifier, `claude-opus-4-8`, read-only
 - [x] T006 [US3] `agents/unit-test-generator.agent.md` — RED, `claude-haiku-4-5-20251001` (cheap), loads FIRST + tdd-red-green
-- [x] T007 [US3] `agents/bug-fixer.agent.md` — Implementer GREEN, `claude-sonnet-5`, loads tdd-red-green
+- [x] T007 [US3] `agents/bug-fixer.agent.md` — Bug Fixer GREEN, `claude-sonnet-5`, loads tdd-red-green
 - [x] T008 [US3] `agents/security-verifier.agent.md` — `claude-opus-4-8`, report-only
 
 ## Phase 3: Skills
@@ -45,25 +45,25 @@ Single project rooted at `homework-4/` — `agents/`, `skills/`, `src/`, `tests/
 
 ## Phase 4: Orchestration + seed input
 
-- [x] T013 [US1] `context/build/001/feature-request.md` (human seed brief)
+- [x] T013 [US1] `context/bugs/001/bug-context.md` (human seed brief)
 - [x] T014 [US1] `run-pipeline.sh`: fixed order Architect→Verify→RED→GREEN→Security, auto-load skills, per-stage `--allowedTools`
 - [x] T015 [US1] Human plan gate: default stops after Architect; `--continue` runs 2..5; `--all` bypasses; `--only <stage>`; `--dry-run`
 - [x] T016 [US1] Verify `--dry-run` shows correct order, models, skills, tool boundaries
 
-## Phase 5: User Story 1 — Design-first + human gate (RUN)
+## Phase 5: User Story 1 — Research-first + human gate (RUN)
 
-**Independent Test**: `./run-pipeline.sh` yields `architecture.md` + stubs, then halts.
+**Independent Test**: `./run-pipeline.sh` yields codebase-research.md + implementation-plan.md, then halts.
 
-- [ ] T017 [US1] Run Stage 1 (Architect) → `architecture.md` + `src/` stubs (NotImplementedError)
-- [ ] T018 [US1] **Human verifies the plan** (review `architecture.md` + stubs) ← gate
+- [ ] T017 [US1] Run Stage 1 (Architect) → `codebase-research.md` + `implementation-plan.md` (bugs researched + fixes planned)
+- [ ] T018 [US1] **Human verifies the plan** (review codebase-research.md + implementation-plan.md) ← gate
 
 ## Phase 6: User Story 2 — TDD RED→GREEN (RUN, after --continue)
 
 **Independent Test**: suite RED after stage 3, GREEN after stage 4, tests unchanged.
 
-- [ ] T019 [US1] Run Stage 2 (Design Verifier) → `verified-design.md` (quality level)
+- [ ] T019 [US1] Run Stage 2 (Bug Research Verifier) → `verified-research.md` (quality level)
 - [ ] T020 [US2] Run Stage 3 (Unit Test Generator) → tests under `tests/`, confirm RED, `test-report.md`
-- [ ] T021 [US2] Run Stage 4 (Implementer) → fill stubs, suite GREEN, `implementation-summary.md`
+- [ ] T021 [US2] Run Stage 4 (Bug Fixer) → apply fixes, suite GREEN, `fix-summary.md`
 - [ ] T022 [US2] Confirm the RED tests were not edited between RED and GREEN
 
 ## Phase 7: User Story 2/3 — Security + verification (RUN)

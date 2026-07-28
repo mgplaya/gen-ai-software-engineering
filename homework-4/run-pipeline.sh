@@ -26,7 +26,7 @@ ROOT="$(CDPATH="" cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
 WORKFLOW="pipeline.yaml"
-BUILD_DIR="context/build/001"
+BUILD_DIR="context/bugs/001"
 LOG="$BUILD_DIR/pipeline-run.log"
 DRY_RUN=false
 MODE="gate"      # gate | continue | all | only | list
@@ -188,7 +188,8 @@ case "$MODE" in
       log ""
       log "=================================================================="
       log "PLAN GATE — stage '${S_ID[$GATE_IDX]}' finished. Verify the plan now:"
-      log "   $BUILD_DIR/architecture.md   (+ the stub files under src/)"
+      log "   $BUILD_DIR/research/codebase-research.md   (the bugs)"
+      log "   $BUILD_DIR/implementation-plan.md          (the proposed fixes)"
       log "When satisfied, continue with:  ./run-pipeline.sh --continue"
       log "=================================================================="
       exit 0
@@ -206,7 +207,7 @@ esac
 log ""
 log "=================================================================="
 log "PIPELINE COMPLETE. Artifacts in $BUILD_DIR:"
-for f in architecture.md verified-design.md test-report.md implementation-summary.md security-report.md; do
+for f in research/codebase-research.md implementation-plan.md research/verified-research.md test-report.md fix-summary.md security-report.md; do
   if [ -f "$BUILD_DIR/$f" ]; then log "   [ok]   $BUILD_DIR/$f"; else log "   [MISS] $BUILD_DIR/$f"; fi
 done
 log "Run '$PYTHON -m pytest' to confirm the build is green."

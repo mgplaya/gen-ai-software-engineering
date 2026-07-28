@@ -14,27 +14,27 @@ so tests are genuinely written first and drive the implementation.
 RED  →  GREEN  →  (REFACTOR)
 ```
 
-- **RED** (Unit Test Generator): write a failing test that encodes a piece of the
-  designed contract. It MUST fail now, because the implementation is only a stub that
-  raises `NotImplementedError`. A test that passes before any implementation exists
-  is a broken test.
-- **GREEN** (Implementer): write the *minimal* code that makes the failing tests
+- **RED** (Unit Test Generator): write a failing test that asserts the *correct*
+  behavior. It MUST fail now, because the seeded code is buggy — the failure
+  reproduces and pins down the bug. A test that passes against the buggy code is not
+  exercising the bug and is therefore useless as a regression guard.
+- **GREEN** (Bug Fixer): write the *minimal* code that makes the failing tests
   pass — nothing more. No speculative features, no behavior the tests don't require.
-- **REFACTOR** (Implementer, optional): once green, tidy the implementation without
+- **REFACTOR** (Bug Fixer, optional): once green, tidy the implementation without
   changing behavior; the tests must stay green.
 
 ## Rules for the RED agent (Test Author)
 
-1. Tests are the specification — derive them from `architecture.md`, not from any
-   implementation (there isn't one yet).
-2. Each test must fail for the *right reason*: the function is unimplemented or the
-   asserted contract is not yet met — not because of an import error or a typo.
-3. Never write or stub implementation logic to make a test pass. Your deliverable is
-   a suite that is RED.
+1. Tests are the specification — derive the *correct behavior* from
+   `codebase-research.md`, not from the current (buggy) implementation.
+2. Each test must fail for the *right reason*: the asserted correct behavior is not
+   met because of the seeded bug — not because of an import error or a typo.
+3. Never edit `src/` to make a test pass. Your deliverable is a suite that is RED,
+   reproducing the bugs.
 4. Cover the normal contract, edge cases, and every security-sensitive requirement
    named in the design.
 
-## Rules for the GREEN agent (Implementer)
+## Rules for the GREEN agent (Bug Fixer)
 
 1. Do NOT modify the tests. If a test seems wrong, report it — the tests are the
    contract you must satisfy.

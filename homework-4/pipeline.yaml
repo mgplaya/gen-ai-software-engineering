@@ -18,29 +18,29 @@
 
 stages:
   - id: architect
-    name: Architect
+    name: Architect (Bug Researcher + Planner)
     agent: agents/architect.agent.md
-    tools: Read Glob Grep Edit Write
+    tools: Read Glob Grep Write
     gate_after: true
-    goal: "Design expense_splitter, scaffold stub interfaces (raise NotImplementedError), and describe the build sequence in architecture.md."
+    goal: "Investigate the seeded buggy code (BUG-1/BUG-2/SEC-1) from bug-context.md, and write research/codebase-research.md (bugs with file:line + correct behavior) + implementation-plan.md (exact before/after fixes + Build Sequence). Do not edit code."
 
-  - id: design-verifier
-    name: Design Verifier
+  - id: research-verifier
+    name: Bug Research Verifier
     agent: agents/research-verifier.agent.md
     tools: Read Glob Grep Write
-    goal: "Verify every interface in architecture.md against the stubs and rate design quality; write verified-design.md. No code edits."
+    goal: "Verify every bug in research/codebase-research.md against the real source and rate research quality; write research/verified-research.md. No code edits."
 
   - id: test-author
     name: Unit Test Generator (TDD RED)
     agent: agents/unit-test-generator.agent.md
     tools: Read Glob Grep Edit Write Bash
-    goal: "Write FIRST-compliant tests against the designed interfaces; confirm they FAIL (RED); write test-report.md. Do not implement logic."
+    goal: "Write FIRST-compliant tests asserting the CORRECT behavior; confirm they FAIL (RED) against the buggy code, reproducing each bug; write test-report.md. Do not edit src."
 
-  - id: implementer
-    name: Implementer (TDD GREEN)
+  - id: bug-fixer
+    name: Bug Fixer (TDD GREEN)
     agent: agents/bug-fixer.agent.md
     tools: Read Glob Grep Edit Write Bash
-    goal: "Fill the stubs with minimal correct logic until the tests pass (GREEN) without editing tests; write implementation-summary.md."
+    goal: "Apply implementation-plan.md fixes to the buggy code until the RED tests pass (GREEN), without editing tests; write fix-summary.md."
 
   - id: security-verifier
     name: Security Verifier

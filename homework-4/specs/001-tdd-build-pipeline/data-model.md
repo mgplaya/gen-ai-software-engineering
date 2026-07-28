@@ -5,25 +5,26 @@
 No database; the "data model" is the durable artifacts exchanged between agents plus
 the target app's entities.
 
-## Pipeline Artifacts (under `context/build/001/`)
+## Pipeline Artifacts (under `context/bugs/001/`)
 
 ```mermaid
 flowchart LR
-  FR[feature-request.md] --> A[architecture.md + src/ stubs]
-  A --> V[verified-design.md]
+  FR[bug-context.md + buggy src/] --> A[research/codebase-research.md<br/>+ implementation-plan.md]
+  A --> V[research/verified-research.md]
   A --> T[test-report.md RED]
   V --> T
-  T --> I[implementation-summary.md GREEN]
+  T --> I[fix-summary.md GREEN]
   I --> S[security-report.md]
 ```
 
 | Artifact | Produced by | Consumed by | Required sections |
 |----------|-------------|-------------|-------------------|
-| `feature-request.md` | Human (seed) | Architect | goal, capabilities, non-functional, security, done |
-| `architecture.md` | **Architect** | Design Verifier, Test Gen, Implementer | Overview; Public Interface; Behaviors & Invariants; Edge Cases; Security-Sensitive Requirements; Project Structure; Build Sequence; References |
-| `verified-design.md` | **Design Verifier** | human gate, Test Gen | Verification Summary; Verified Claims; Discrepancies; Quality Assessment; References |
-| `test-report.md` | **Unit Test Generator** | Implementer | Generated Tests; RED Run Outcome; FIRST Assessment; References |
-| `implementation-summary.md` | **Implementer** | Security Verifier | Functions Implemented; Test Result (RED→GREEN); Overall Status; Manual Verification; References |
+| `bug-context.md` | Human (seed) | Architect | goal, capabilities, non-functional, security, done |
+| `research/codebase-research.md` | **Architect** | Bug Research Verifier, Test Gen | Overview; Public Interface; Behaviors & Invariants; Edge Cases; Security-Sensitive Requirements; References |
+| `implementation-plan.md` | **Architect** | Bug Fixer, Test Gen | Test command; Per-Bug Fix (before/after); Build Sequence |
+| `research/verified-research.md` | **Bug Research Verifier** | human gate, Test Gen | Verification Summary; Verified Claims; Discrepancies; Quality Assessment; References |
+| `test-report.md` | **Unit Test Generator** | Bug Fixer | Generated Tests; RED Run Outcome; FIRST Assessment; References |
+| `fix-summary.md` | **Bug Fixer** | Security Verifier | Changes Made; Test Result (RED→GREEN); Overall Status; Manual Verification; References |
 | `security-report.md` | **Security Verifier** | human | Scope; Security Requirement Check; Findings (severity/`file:line`/remediation); Summary |
 
 Bold rows are the five agents' outputs.
@@ -46,8 +47,8 @@ Bold rows are the five agents' outputs.
 
 | Agent | May read | May write |
 |-------|----------|-----------|
-| Architect | feature-request | `architecture.md` + `src/**` stubs (no logic) |
-| Design Verifier | design + stubs | `verified-design.md` only |
-| Unit Test Generator | design + stubs | `tests/**` + `test-report.md` |
-| Implementer | design + tests + stubs | `src/**` logic + `implementation-summary.md` |
-| Security Verifier | implemented src + summary | `security-report.md` only |
+| Architect | bug-context | `research/codebase-research.md` + `implementation-plan.md` + the buggy `src/` (no logic) |
+| Bug Research Verifier | research + buggy src | `research/verified-research.md` only |
+| Unit Test Generator | plan + research + buggy src | `tests/**` + `test-report.md` |
+| Bug Fixer | plan + tests + buggy src | `src/**` logic + `fix-summary.md` |
+| Security Verifier | implemented src + fix-summary | `security-report.md` only |

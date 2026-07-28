@@ -6,36 +6,37 @@ Each agent is a function over files: it reads fixed inputs and writes one output
 artifact (mutating agents also touch `src/`/`tests/`). `run-pipeline.sh` enforces
 order, loads skills, and scopes tools.
 
-## Stage 1 — Architect
-- **Model**: `claude-opus-4-8` · **Tools**: `Read Glob Grep Edit Write` (no Bash)
+## Stage 1 — Architect (acts as Bug Researcher + Bug Planner)
+- **Model**: `claude-opus-4-8` · **Tools**: `Read Glob Grep Write` (read-only w.r.t. code)
 - **Loads skill**: `skills/architecture-design.md`
-- **Reads**: `context/build/001/feature-request.md`
-- **Writes**: `context/build/001/architecture.md` + `src/expense_splitter/**` stubs
-  (signatures + docstrings + `raise NotImplementedError`, no logic)
-- **MUST NOT**: write tests or real implementation.
+- **Reads**: `context/bugs/001/bug-context.md`, the buggy `src/`
+- **Writes**: `context/bugs/001/research/codebase-research.md` (bugs with `file:line`
+  + root cause + correct behavior) + `context/bugs/001/implementation-plan.md`
+  (the exact before/after fixes + Build Sequence)
+- **MUST NOT**: edit code or write tests.
 - **Then**: HUMAN PLAN GATE — pipeline stops for human verification.
 
-## Stage 2 — Design Verifier (required "Bug Research Verifier" agent)
+## Stage 2 — Bug Research Verifier
 - **Model**: `claude-opus-4-8` · **Tools**: `Read Glob Grep Write` (read-only)
 - **Loads skill**: `skills/research-quality-measurement.md`
-- **Reads**: `architecture.md`, `feature-request.md`, `src/**` stubs
-- **Writes**: `context/build/001/verified-design.md`
+- **Reads**: `research/codebase-research.md`, `bug-context.md`, the buggy `src/`
+- **Writes**: `context/bugs/001/research/verified-research.md`
 - **Output**: Verification Summary (PASS/FAIL + quality A/B/C/D); Verified Claims;
   Discrepancies; Quality Assessment; References. No code edits.
 
 ## Stage 3 — Unit Test Generator (TDD RED)
 - **Model**: `claude-haiku-4-5-20251001` (cheap) · **Tools**: `Read Glob Grep Edit Write Bash`
 - **Loads skills**: `skills/unit-tests-FIRST.md`, `skills/tdd-red-green.md`
-- **Reads**: `architecture.md`, `verified-design.md`, `src/**` stubs
-- **Writes**: `tests/**`, `context/build/001/test-report.md`
-- **MUST**: tests fail (RED) because implementation is missing; do not implement.
+- **Reads**: `implementation-plan.md`, `research/codebase-research.md`, `research/verified-research.md`, the buggy `src/`
+- **Writes**: `tests/**`, `context/bugs/001/test-report.md`
+- **MUST**: tests assert the correct behavior and fail (RED) against the buggy code, reproducing the bugs; do not edit `src/`.
 - **Output**: Generated Tests; RED Run Outcome; FIRST Assessment; References.
 
-## Stage 4 — Implementer (TDD GREEN) (required "Bug Fixer" agent)
+## Stage 4 — Bug Fixer (TDD GREEN) (required "Bug Fixer" agent)
 - **Model**: `claude-sonnet-5` · **Tools**: `Read Glob Grep Edit Write Bash`
 - **Loads skill**: `skills/tdd-red-green.md`
-- **Reads**: `architecture.md`, `verified-design.md`, `test-report.md`, `src/**`, `tests/**`
-- **Writes**: `src/**` (real logic), `context/build/001/implementation-summary.md`
+- **Reads**: `implementation-plan.md`, `research/verified-research.md`, `test-report.md`, `src/**`, `tests/**`
+- **Writes**: `src/**` (real logic), `context/bugs/001/fix-summary.md`
 - **MUST**: make the suite GREEN without editing tests; if a test contradicts the
   design, stop with `BLOCKED`.
 - **Output**: Functions Implemented; Test Result (RED→GREEN); Overall Status; Manual
@@ -43,8 +44,8 @@ order, loads skills, and scopes tools.
 
 ## Stage 5 — Security Verifier
 - **Model**: `claude-opus-4-8` · **Tools**: `Read Glob Grep Write` (read-only)
-- **Reads**: `implementation-summary.md`, `architecture.md`, implemented `src/**`
-- **Writes**: `context/build/001/security-report.md` only
+- **Reads**: `fix-summary.md`, `codebase-research.md`, implemented `src/**`
+- **Writes**: `context/bugs/001/security-report.md` only
 - **Output**: Scope; Security Requirement Check (PASS/FAIL); Findings (severity,
   `file:line`, remediation); Summary. No code edits.
 

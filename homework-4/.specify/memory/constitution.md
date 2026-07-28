@@ -2,7 +2,7 @@
 Sync Impact Report
 Version change: 1.0.0 → 2.0.0
 Bump rationale: MAJOR. The pipeline is redefined from a bug-fix flow into a
-design-first, TDD build flow led by an Architect, with a human plan-verification
+research-first, TDD build flow led by an Architect, with a human plan-verification
 gate. Principles were re-authored accordingly.
 Modified principles:
   - I. Artifact-Driven Handoff (kept, updated artifact chain)
@@ -12,9 +12,9 @@ Modified principles:
   - V. Model-Appropriateness (kept, explicit "cheap for tests / heavy for design")
   - VI. Reproducible Single-Command Execution (kept, now staged around the gate)
 Added principles:
-  - VII. Design-First, Then TDD (NON-NEGOTIABLE) — the core new principle
+  - VII. Research-First, Then TDD (NON-NEGOTIABLE) — the core new principle
 Added sections: none (structure preserved).
-Removed sections: seeded-bug constraints (the app is now built from scratch, clean).
+Amended (2026-07-28): reframed from a clean-build to a seeded-bug flow — the app ships with 2 bugs + 1 vuln that the pipeline reproduces (RED) and fixes (GREEN).
 Templates requiring updates:
   - .specify/templates/plan-template.md ✅ Constitution Check gate still applies
   - specs/001-agent-bug-pipeline/* ✅ rewritten to the TDD build pipeline
@@ -31,20 +31,20 @@ Every agent communicates ONLY through durable, human-readable Markdown artifacts
 disk plus the source tree — never hidden state. Each agent reads its declared inputs
 and writes exactly one declared report artifact (agents that produce code also touch
 the source/test tree). The contract chain is:
-`feature-request.md` → `architecture.md` (+ stubs) → `verified-design.md` →
-`test-report.md` (RED) → `implementation-summary.md` (GREEN) → `security-report.md`.
+`bug-context.md` → `research/codebase-research.md` + `implementation-plan.md`
+→ `research/verified-research.md` → `test-report.md` (RED) →
+`fix-summary.md` (GREEN) → `security-report.md`.
 Rationale: durable artifacts make the run auditable, resumable, and gradable, and let
 any stage be re-run without re-running upstream stages.
 
 ### II. Single Responsibility per Agent
 
-Each agent has one job and a bounded permission set. The **Architect** designs and
-scaffolds interfaces (stubs only, no logic). The **Design Verifier** and **Security
-Verifier** are READ-ONLY and MUST NOT edit code. The **Unit Test Generator** writes
-only under `tests/`. The **Implementer** (the required "Bug Fixer" agent in its
-build role) is the only agent that writes real logic under `src/`. Rationale:
-separating who designs, who tests, who implements, and who reviews prevents any one
-agent from grading its own work.
+Each agent has one job and a bounded permission set. The **Architect** researches the
+bugs and plans the fixes (read-only w.r.t. code). The **Bug Research Verifier** and
+**Security Verifier** are READ-ONLY and MUST NOT edit code. The **Unit Test
+Generator** writes only under `tests/`. The **Bug Fixer** is the only agent that
+edits `src/`. Rationale: separating who researches, who tests, who fixes, and who
+reviews prevents any one agent from grading its own work.
 
 ### III. Verification Before Trust (human + machine)
 
@@ -83,14 +83,15 @@ the first invocation runs the Architect and stops; a `--continue` invocation run
 remaining stages. Every run is reproducible from a clean checkout. Rationale: a
 one-command, deterministic, gated pipeline is the graded deliverable.
 
-### VII. Design-First, Then TDD (NON-NEGOTIABLE)
+### VII. Research-First, Then TDD (NON-NEGOTIABLE)
 
-We design before we build, and we test before we implement. The fixed order is:
-**Architect designs → human verifies the plan → design is machine-verified → failing
-tests are written (RED) → implementation makes them pass (GREEN) → security review**.
-No agent may implement production logic before the design is verified and the failing
-tests exist. Rationale: this is the methodology the homework is demonstrating; skipping
-straight to code is precisely what this pipeline exists to prevent.
+We research and plan before we change code, and we write the failing test before we
+fix. The fixed order is: **Architect researches the bugs and plans the fixes → human
+verifies the plan → research is machine-verified → failing tests reproduce the bugs
+(RED) → fixes make them pass (GREEN) → security review**. No agent may change
+production code before the plan is verified and the failing tests exist. Rationale:
+this is the methodology the homework is demonstrating; jumping straight to a fix
+without a reproducing test is precisely what this pipeline exists to prevent.
 
 ## Pipeline Constraints
 
@@ -98,14 +99,18 @@ straight to code is precisely what this pipeline exists to prevent.
   `architecture-design` skill; TDD discipline uses the `tdd-red-green` skill; design
   quality uses `research-quality-measurement`; test quality uses `unit-tests-FIRST`.
   Agents MUST apply the relevant skill rather than inventing ad-hoc criteria.
-- **The app is built clean, from scratch.** The target (`expense_splitter`) starts as
-  Architect-authored stubs raising `NotImplementedError`; the Implementer fills them
-  in. There are no pre-seeded bugs.
-- **Security is designed-in, not seeded.** The Architect MUST call out at least one
-  security-sensitive requirement (e.g. never `eval` untrusted CLI input); the Security
-  Verifier confirms the implementation honors it.
-- **Report-only agents produce no code edits.** Design Verifier and Security Verifier
-  output reports only, with findings, severity where relevant, and `file:line`.
+- **The app ships with seeded bugs.** The target (`expense_splitter`) contains at
+  least 2 intentional functional bugs and at least 1 intentional security
+  vulnerability, documented in `bug-context.md`. The pipeline exposes them with
+  failing TDD tests (RED) and fixes them (GREEN) — it does not build clean from
+  scratch.
+- **Security bug is real and fixed.** One seeded defect is a security vulnerability
+  (untrusted CLI input passed to `eval`). The Bug Fixer removes the unsafe execution
+  path; the Security Verifier confirms untrusted input is never executed.
+- **Read-only agents produce no code edits.** The Architect (researcher/planner),
+  Bug Research Verifier, and Security Verifier make no code edits — they output
+  research/plan/report artifacts only, with findings, severity where relevant, and
+  `file:line`.
 
 ## Development Workflow
 
@@ -125,4 +130,4 @@ expanded guidance, PATCH for clarifications. All PRs MUST verify that agent beha
 and pipeline order comply with these principles; unjustified complexity is grounds
 for revision.
 
-**Version**: 2.0.0 | **Ratified**: 2026-07-27 | **Last Amended**: 2026-07-27
+**Version**: 2.1.0 | **Ratified**: 2026-07-27 | **Last Amended**: 2026-07-28

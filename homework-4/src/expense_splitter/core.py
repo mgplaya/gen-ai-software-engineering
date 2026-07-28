@@ -1,110 +1,57 @@
-"""Core splitting logic for expense_splitter.
+"""Core expense-splitting logic for the expense_splitter sample app.
 
-All amounts are :class:`decimal.Decimal` values quantized to 2 fractional
-digits (cents). The invariant every function here must preserve is that the
-returned shares sum *exactly* to the input total.
+The two functional bugs (BUG-1, BUG-2) seeded for the pipeline have been fixed by
+the Bug Fixer stage (see context/bugs/001/fix-summary.md). Shares now always
+reconcile exactly with the total.
 """
 
 from __future__ import annotations
 
-from decimal import Decimal
-from fractions import Fraction
-from typing import Sequence
+from decimal import ROUND_HALF_UP, Decimal
+from typing import List
 
 
-def split_even(total: Decimal, people: int) -> list[Decimal]:
-    """Split ``total`` evenly among ``people`` people.
+def split_even(total: Decimal, people: int) -> List[Decimal]:
+    """Split ``total`` evenly among ``people``.
 
-    Returns a list of ``people`` share amounts, each a Decimal quantized to
-    2 fractional digits (cents). The shares MUST sum exactly to ``total``.
-    When ``total`` does not divide evenly into whole cents, the leftover
-    cents are distributed one-per-person to the earliest people, so the
-    largest shares come first and no cent is created or lost.
-
-    Args:
-        total: The bill amount. Must be a non-negative Decimal with at most
-            2 fractional digits.
-        people: The number of people to split among. Must be an integer >= 1.
-
-    Returns:
-        A list of length ``people`` of Decimal shares summing to ``total``.
-
-    Raises:
-        ValueError: If ``people`` < 1, if ``total`` is negative, or if
-            ``total`` has more than 2 fractional digits.
-        TypeError: If ``total`` is not a Decimal or ``people`` is not an int.
+    Returns one share per person. The shares MUST sum back to ``total`` exactly
+    (money is never created or lost to rounding).
     """
-    if not isinstance(total, Decimal):
-        raise TypeError("total must be a Decimal")
-    if not isinstance(people, int) or isinstance(people, bool):
-        raise TypeError("people must be an int")
-    if people < 1:
-        raise ValueError("people must be >= 1")
-    if total < 0:
-        raise ValueError("total must be non-negative")
-    if total.as_tuple().exponent < -2:
-        raise ValueError("total must have at most 2 fractional digits")
+    if people <= 0:
+        raise ValueError("people must be positive")
 
-    cents = int((total * 100).to_integral_value())
-    base, remainder = divmod(cents, people)
-    shares = []
-    for i in range(people):
-        share_cents = base + (1 if i < remainder else 0)
-        shares.append(Decimal(share_cents).scaleb(-2))
-    return shares
+    # Distribute the remainder cents so the shares sum back to ``total`` exactly.
+    cents = int((total * 100).to_integral_value(rounding=ROUND_HALF_UP))
+    base, extra = divmod(cents, people)
+    shares = [base + (1 if i < extra else 0) for i in range(people)]
+    return [(Decimal(c) / 100).quantize(Decimal("0.01")) for c in shares]
 
 
-def split_weighted(total: Decimal, weights: Sequence[Decimal | int]) -> list[Decimal]:
-    """Split ``total`` among people in proportion to ``weights``.
+def split_weighted(total: Decimal, weights: List[int]) -> List[Decimal]:
+    """Split ``total`` proportionally to ``weights``.
 
-    Each person's share is proportional to their weight relative to the sum
-    of all weights. Shares are quantized to 2 fractional digits (cents) and
-    MUST sum exactly to ``total``: any leftover cents from rounding are
-    distributed to the people with the largest fractional remainders (ties
-    broken by earliest index), so the result reconciles exactly.
-
-    Args:
-        total: The bill amount. Must be a non-negative Decimal with at most
-            2 fractional digits.
-        weights: A non-empty sequence of positive weights (int or Decimal).
-            The sum of weights must be > 0.
-
-    Returns:
-        A list, the same length as ``weights``, of Decimal shares summing to
-        ``total``.
-
-    Raises:
-        ValueError: If ``weights`` is empty, if any weight is negative, if the
-            weights sum to 0, or if ``total`` is negative / has more than 2
-            fractional digits.
-        TypeError: If ``total`` is not a Decimal or a weight is not int/Decimal.
+    Each share should equal ``total * weight / sum(weights)``.
     """
-    if not isinstance(total, Decimal):
-        raise TypeError("total must be a Decimal")
-    for weight in weights:
-        if isinstance(weight, bool) or not isinstance(weight, (int, Decimal)):
-            raise TypeError("weights must be int or Decimal")
-    if len(weights) == 0:
-        raise ValueError("weights must not be empty")
-    if any(weight < 0 for weight in weights):
-        raise ValueError("weights must not be negative")
-    total_weight = sum(weights)
-    if total_weight <= 0:
-        raise ValueError("sum of weights must be > 0")
-    if total < 0:
-        raise ValueError("total must be non-negative")
-    if total.as_tuple().exponent < -2:
-        raise ValueError("total must have at most 2 fractional digits")
+    if not weights:
+        raise ValueError("weights must be non-empty")
+    if any(w < 0 for w in weights):
+        raise ValueError("weights must be non-negative")
 
-    cents_total = int((total * 100).to_integral_value())
-    total_weight_frac = Fraction(total_weight)
-    exact_shares = [Fraction(cents_total) * Fraction(weight) / total_weight_frac for weight in weights]
-    floors = [int(share) for share in exact_shares]
-    remainder = cents_total - sum(floors)
-    fractional_parts = [share - floor for share, floor in zip(exact_shares, floors)]
-    order = sorted(range(len(weights)), key=lambda i: (-fractional_parts[i], i))
+    # Denominator is the total weight so shares are proportional to the weights.
+    denom = sum(weights)
+    if denom == 0:
+        raise ValueError("weights must sum to a positive value")
 
-    shares_cents = floors[:]
-    for i in order[:remainder]:
+    # Largest-remainder method (same idea as split_even): compute each share's
+    # exact cents, floor it, then hand out the leftover cents to the weights
+    # with the biggest fractional remainder so the shares sum back to ``total``.
+    total_cents = int((total * 100).to_integral_value(rounding=ROUND_HALF_UP))
+    numerators = [total_cents * w for w in weights]
+    base = [n // denom for n in numerators]
+    remainders = [n % denom for n in numerators]
+    leftover = total_cents - sum(base)
+    order = sorted(range(len(weights)), key=lambda i: remainders[i], reverse=True)
+    shares_cents = list(base)
+    for i in order[:leftover]:
         shares_cents[i] += 1
-    return [Decimal(c).scaleb(-2) for c in shares_cents]
+    return [(Decimal(c) / 100).quantize(Decimal("0.01")) for c in shares_cents]
