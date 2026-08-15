@@ -1,0 +1,18 @@
+[project]
+name = "lorem-ipsum-mcp"
+version = "1.0.0"
+description = "Custom FastMCP server exposing lorem-ipsum.md as an MCP resource and a read tool"
+requires-python = ">=3.10"
+dependencies = ["fastmcp>=3.4.7"]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.uv]
+# Not an installable package — uv only needs to resolve dependencies.
+package = false
+
+[tool.pytest.ini_options]
+# Lets tests/ import server.py without an installed package.
+pythonpath = ["."]
+testpaths = ["tests"]
