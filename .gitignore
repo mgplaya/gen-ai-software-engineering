@@ -14,6 +14,10 @@ dist/
 .env.*.local
 *.env
 
+# Local Claude Code settings — may hold tokens injected into .mcp.json via "env"
+.claude/settings.local.json
+**/.claude/settings.local.json
+
 # IDE and editor files
 .idea/
 .vscode/
