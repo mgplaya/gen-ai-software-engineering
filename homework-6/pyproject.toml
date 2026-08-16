@@ -1,0 +1,17 @@
+[project]
+name = "banking-pipeline"
+version = "0.1.0"
+description = "Multi-agent banking transaction processing pipeline"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
